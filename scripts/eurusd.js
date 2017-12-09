@@ -13,7 +13,7 @@ execute();
 function execute() {
 	driver.get('https://www.oanda.com/currency/live-exchange-rates/EURUSD/');
 	driver.sleep(5000);
-	driver.fintsdElement(By.id('EUR_USD-b-int')).getAttribute("innerHTML").then(function(data) {
+	driver.findElement(By.id('EUR_USD-b-int')).getAttribute("innerHTML").then(function(data) {
 		console.log('int found');
 		b_int = data;
 		if (b_int <= 0) {
@@ -28,7 +28,7 @@ function execute() {
 				b_pip = data;
 				eurusd = b_int.toString().concat(b_pip.toString());
 				console.log(Number(eurusd));
-				fs.writeFileSync('./db/eurusd.txt', eurusd);
+				fs.writeFileSync('./../db/eurusd.txt', eurusd);
 				console.log('wrote above value to file');
 				driver.quit();
 			});

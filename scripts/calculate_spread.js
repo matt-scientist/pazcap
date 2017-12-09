@@ -12,7 +12,7 @@ var loadFile = function (path) {
     });
 };
 
-var promises = ['./db/mid_btcusd.txt', './db/mid_btceur.txt', './db/eurusd.txt'].map(loadFile);
+var promises = ['./../db/mid_btcusd.txt', './../db/mid_btceur.txt', './../db/eurusd.txt'].map(loadFile);
 
 rsvp.all(promises).then(function(files) {
   // proceed - files is array of your files in the order specified above.
