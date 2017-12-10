@@ -53,7 +53,7 @@ var fs = require('fs');
             var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
 
             console.log(midprice);
-            fs.writeFileSync('./../db/mid_btcusd.txt', midprice);
+            fs.writeFileSync('./db/mid_btcusd.txt', midprice);
 
             console.log("\n");
         }, 2000);
@@ -100,7 +100,7 @@ var fs = require('fs');
             var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
 
             console.log(midprice);
-            fs.writeFileSync('./../db/mid_btceur.txt', midprice);
+            fs.writeFileSync('./db/mid_btceur.txt', midprice);
 
             console.log("\n\n");
         }, 2000);
