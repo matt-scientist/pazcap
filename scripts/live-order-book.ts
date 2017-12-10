@@ -9,15 +9,6 @@ var fs = require('fs');
  Simple demo that sets up a live order book and then periodically prints some stats to the console.
  */
 
- var eurusd;
-
- fs.readFile("./../db/eurusd.txt", "utf-8", function(err: String, data: String) {
-    console.log(Number(data));
-    eurusd = data;
- });
-
- console.log(eurusd);
-
  btcUsd();
  btcEur();
 
@@ -32,18 +23,12 @@ var fs = require('fs');
     };
     const book = new LiveOrderbook(config);
     book.on('LiveOrderbook.snapshot', () => {
-        logger.log('info', 'Snapshot received by LiveOrderbook Demo');
         setInterval(() => {
-            console.log('USD---------------------------------------');
-            console.log("Size: " + book.state().asks[0].totalSize + " | Price: " + book.state().asks[0].price)
-            console.log("Size: " + book.state().bids[0].totalSize + " | Price: " + book.state().bids[0].price)
 
             var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
 
-            console.log(midprice);
             fs.writeFileSync('./db/mid_btcusd.txt', midprice);
-
-            console.log("\n");
+            console.log("wrote " + midprice + " to mid_btcusd.txt");
         }, 2000);
     });
     book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
@@ -74,19 +59,12 @@ var fs = require('fs');
     };
     const book = new LiveOrderbook(config);
     book.on('LiveOrderbook.snapshot', () => {
-        logger.log('info', 'Snapshot received by LiveOrderbook Demo');
         setInterval(() => {
-            console.log('EUR---------------------------------------');
-            console.log("Size: " + book.state().asks[0].totalSize + " | Price: " + book.state().asks[0].price)
-            console.log("Size: " + book.state().bids[0].totalSize + " | Price: " + book.state().bids[0].price)
-            console.log("___________________________________________________________________________________")
 
             var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
 
-            console.log(midprice);
             fs.writeFileSync('./db/mid_btceur.txt', midprice);
-
-            console.log("\n\n");
+            console.log("wrote " + midprice + " to mid_btceur.txt");
         }, 2000);
     });
     book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
