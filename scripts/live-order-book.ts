@@ -9,77 +9,47 @@ var fs = require('fs');
  Simple demo that sets up a live order book and then periodically prints some stats to the console.
  */
 
- btcUsd();
- btcEur();
+ const productIds: Array<string> = ['BTC-USD', 'BTC-EUR', 'ETH-USD', 'ETH-BTC', 'LTC-USD', 'LTC-BTC'];
 
- function btcUsd () {
-    const product = 'BTC-USD';
+ orderBook(productIds);
 
-    GTT.Factories.GDAX.FeedFactory(logger, [product]).then((feed: GDAXFeed) => {
-    // Configure the live book object
-    const config: LiveBookConfig = {
-        product: product,
-        logger: logger
-    };
-    const book = new LiveOrderbook(config);
-    book.on('LiveOrderbook.snapshot', () => {
-        setInterval(() => {
-
-            var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
-
-            fs.writeFileSync('./db/mid_btcusd.txt', midprice);
-            console.log("wrote " + midprice + " to mid_btcusd.txt");
-        }, 2000);
-    });
-    book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
-        // On GDAX, this event should never be emitted, but we put it here for completeness
-        console.log('SKIPPED MESSAGE', details);
-        console.log('Reconnecting to feed');
-        feed.reconnect(0);
-    });
-    book.on('end', () => {
-        console.log('Orderbook closed');
-    });
-    book.on('error', (err) => {
-        console.log('Livebook errored: ', err);
-        feed.pipe(book);
-    });
-    feed.pipe(book);
-    });
+ function orderBook(productIds: Array<string>) {
+     for(var i = 0; i < productIds.length; i++) {
+         setUpBook(productIds[i]);
+     }
  }
 
-  function btcEur () {
-    const product = 'BTC-EUR';
-    
-    GTT.Factories.GDAX.FeedFactory(logger, [product]).then((feed: GDAXFeed) => {
-    // Configure the live book object
-    const config: LiveBookConfig = {
-        product: product,
-        logger: logger
-    };
-    const book = new LiveOrderbook(config);
-    book.on('LiveOrderbook.snapshot', () => {
-        setInterval(() => {
+ function setUpBook(productId:string) {
+     GTT.Factories.GDAX.FeedFactory(logger, [productId]).then((feed: GDAXFeed) => {
+         // Configure the live book object
+         const config: LiveBookConfig = {
+             product: productId,
+             logger: logger
+         };
+         const book = new LiveOrderbook(config);
+         book.on('LiveOrderbook.snapshot', () => {
+             setInterval(() => {
 
-            var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
+                 var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
+                 var filename = './db/' + 'mid_' + productId + '.txt';
 
-            fs.writeFileSync('./db/mid_btceur.txt', midprice);
-            console.log("wrote " + midprice + " to mid_btceur.txt");
-        }, 2000);
-    });
-    book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
-        // On GDAX, this event should never be emitted, but we put it here for completeness
-        console.log('SKIPPED MESSAGE', details);
-        console.log('Reconnecting to feed');
-        feed.reconnect(0);
-    });
-    book.on('end', () => {
-        console.log('Orderbook closed');
-    });
-    book.on('error', (err) => {
-        console.log('Livebook errored: ', err);
-        feed.pipe(book);
-    });
-    feed.pipe(book);
-    });
+                 fs.writeFileSync(filename, midprice);
+                 console.log("wrote " + midprice + " to " + filename);
+             }, 2000);
+         });
+         book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
+             // On GDAX, this event should never be emitted, but we put it here for completeness
+             console.log('SKIPPED MESSAGE', details);
+             console.log('Reconnecting to feed');
+             feed.reconnect(0);
+         });
+         book.on('end', () => {
+             console.log('Orderbook closed');
+         });
+         book.on('error', (err) => {
+             console.log('Livebook errored: ', err);
+             feed.pipe(book);
+         });
+         feed.pipe(book);
+     });
  }
