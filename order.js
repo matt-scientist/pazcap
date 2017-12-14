@@ -1,3 +1,6 @@
+var fs = require("fs");
+const Gdax = require('gdax');
+
 function Order (side, prod, type, size, price) {
 	this.side = side;
 	this.prod = prod;
@@ -9,6 +12,15 @@ function Order (side, prod, type, size, price) {
     };
 }
 
-var test_order = new Order('sell', 'LTCUSD', 'limit', 1, 256.01);
+var test_order = new Order('buy', 'LTCUSD', 'limit', 1, 256.01);
 
-console.log(test_order.getInfo())
+console.log(test_order.getInfo());
+
+var api_key = require("../secret.json");
+
+const key = api_key["key"];
+const b64secret = api_key["secret"];
+const passphrase = api_key["pass"];
+const apiURI = 'https://api.gdax.com';
+
+const authedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);

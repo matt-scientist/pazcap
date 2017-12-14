@@ -19,6 +19,7 @@
     "typescript": "^2.6.2"
   },
   "devDependencies": {
+    "gdax": "^0.4.2",
     "rsvp": "^4.7.0"
   }
 }
