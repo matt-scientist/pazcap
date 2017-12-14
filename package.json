@@ -14,9 +14,11 @@
     "bignumber.js": "^5.0.0",
     "chromedriver": "^2.33.2",
     "gdax-trading-toolkit": "^0.2.1",
-    "rsvp": "^4.7.0",
     "selenium-webdriver": "^3.6.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "rsvp": "^4.7.0"
   }
 }
