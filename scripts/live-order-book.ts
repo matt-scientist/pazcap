@@ -31,10 +31,15 @@ var fs = require('fs');
              setInterval(() => {
 
                  var midprice = Number(book.state().asks[0].price.plus(book.state().bids[0].price).dividedBy(2))
-                 var filename = './db/' + 'mid_' + productId + '.txt';
+                 var bestAsk = Number(book.state().asks[0].price);
+                 var filename = './db/' + productId + '.json';
 
-                 fs.writeFileSync(filename, midprice);
-                 console.log("wrote " + midprice + " to " + filename);
+                 fs.writeFileSync(filename, JSON.stringify({
+                    midprice: midprice,
+                    bestAsk: bestAsk
+                 }));
+
+                 console.log("wrote ask: " + midprice + " and mid: " + bestAsk + " to " + filename);
              }, 2000);
          });
          book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {

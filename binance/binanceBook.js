@@ -10,9 +10,6 @@ binance.options({
 binance.websockets.depthCache(['LTCBTC'], function(symbol, depth) {
     let bids = binance.sortBids(depth.bids);
     let asks = binance.sortAsks(depth.asks);
-    console.log(symbol+" depth cache update");
-    console.log("bids", bids);
-    console.log("asks", asks);
     let bidsKey = binance.first(bids);
     let asksKey = binance.first(asks);
     let bestBidsSize = bids[bidsKey];
@@ -23,8 +20,9 @@ binance.websockets.depthCache(['LTCBTC'], function(symbol, depth) {
     var bidFilename = './binance_db/ltcbtc_bid.json';
     var askFilename = './binance_db/ltcbtc_ask.json';
 
-    console.log(bidsString);
-    console.log(asksString);
+    // console.log(bidsString);
+    // console.log(asksString);
+    console.log("binanceBook wrote" + asksString);
 
     let adjustedAskPrice = asksKey * 1.01;
 
