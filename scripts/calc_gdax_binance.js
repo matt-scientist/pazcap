@@ -18,12 +18,16 @@ var loadFile = function (path) {
         });
     };
 
-var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json'].map(loadFile);
+var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json','./db/ETH-BTC.json', './binance_db/ethbtc_ask.json'].map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 
     var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).midprice) - Number(JSON.parse(files[1]).price);
-    console.log("ltc_btc_binance_gdax" + ltc_btc_binance_gdax);
+    var eth_btc_binance_gdax = Number(JSON.parse(files[2]).midprice) - Number(JSON.parse(files[3]).price);
+
+
+    console.log("ltc_btc_binance_gdax " + ltc_btc_binance_gdax);
+    console.log("eth_btc_binance_gdax " + eth_btc_binance_gdax);
 
     }).catch(function(reason) {
         console.log(reason); // something went wrong...

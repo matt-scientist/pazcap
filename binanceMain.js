@@ -30,6 +30,13 @@ binanceBookChild.on('error', function(err) {
     console.log('err: ', err);
 });
 
+var binanceBookChild_eth = spawn('node', ['./binance/binanceBook_ETHBTC.js']);
+
+binanceBookChild_eth.on('error', function(err) {
+    console.log('***** !!!!! ***** received error from binanceBookChild_eth');
+    console.log('err: ', err);
+});
+
 // binanceBookChild.stdout.on('data', function(data) {
 //     console.log('BINANCE_BOOK: ', data.toString('utf8'));
 // });

@@ -16,7 +16,7 @@ const apiURI = 'https://api.gdax.com';
 
 const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
-marketBuyBinance("LTCBTC", 0.3);
+marketBuyBinance("LTCBTC", 0.0);
 
 function marketBuyBinance(product, quantity) {
 	console.log("market buy with: ", product)
