@@ -16,7 +16,7 @@ var test_order = new Order('buy', 'LTCUSD', 'limit', 1, 256.01);
 
 console.log(test_order.getInfo());
 
-var api_key = require("../secret.json");
+var api_key = require("secrets/secret.json");
 
 const key = api_key["key"];
 const b64secret = api_key["secret"];

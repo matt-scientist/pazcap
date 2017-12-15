@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "gdax": "^0.4.2",
+    "node-binance-api": "^0.2.11",
     "rsvp": "^4.7.0"
   }
 }
