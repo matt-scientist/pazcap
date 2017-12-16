@@ -22,13 +22,16 @@ var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json','./db/ETH-BT
 
 rsvp.all(promises).then(function(files) {
 
-    var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).midprice) - Number(JSON.parse(files[1]).price);
-    var eth_btc_binance_gdax = Number(JSON.parse(files[2]).midprice) - Number(JSON.parse(files[3]).price);
+    var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).bestAsk) - Number(JSON.parse(files[1]).price);
+    //var eth_btc_binance_gdax = Number(JSON.parse(files[2]).midprice) - Number(JSON.parse(files[3]).price);
+
+    fs.writeFileSync('./binance_db/spread_LTC-BTC.txt', ltc_btc_binance_gdax);
 
     console.log('|________________________________________________________|')
     console.log("SPREAD: LTC_BTC_GDAX-BINANCE " + ltc_btc_binance_gdax);
     console.log('|________________________________________________________|')
     //console.log("eth_btc_binance_gdax " + eth_btc_binance_gdax);
+
 
     }).catch(function(reason) {
         console.log(reason); // something went wrong...
