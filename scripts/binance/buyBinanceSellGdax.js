@@ -1,8 +1,8 @@
 const binance = require('node-binance-api');
-const secret = require('../secrets/secret_binance');
+const secret = require('../../secrets/secret_binance');
 var fs = require("fs");
 const Gdax = require('gdax');
-var api_key = require("../secrets/secret.json");
+var api_key = require("../../secrets/secret.json");
 
 binance.options({
     'APIKEY':secret.key,
@@ -19,10 +19,10 @@ const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase
 marketBuyBinance("LTCBTC", 0.0);
 
 function marketBuyBinance(product, quantity) {
-	console.log("market buy with: ", product)
+	console.log("Binance market buy with: ", product)
 	console.log("quantity: ", quantity);
 	binance.marketBuy(product, quantity, function(response) {
-		console.log("Market Buy response", response);
+		console.log("Market Buy response: ", response);
 		console.log("order id: " + response.orderId);
 
 		fs.readFile ("./db/LTC-BTC.json", 'utf8', function (error, data) {

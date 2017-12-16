@@ -1,5 +1,5 @@
 const binance = require('node-binance-api');
-const secret = require('../secrets/secret_binance');
+const secret = require('../../../secrets/secret_binance');
 
 console.log("secret: ", secret.secret);
 

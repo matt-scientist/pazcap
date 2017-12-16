@@ -39,7 +39,7 @@ var fs = require('fs');
                     bestAsk: bestAsk
                  }));
 
-                 console.log("wrote ask: " + midprice + " and mid: " + bestAsk + " to " + filename);
+                 console.log("liveOrderBook wrote mid: " + midprice + " and bestAsk: " + bestAsk + " to " + filename);
              }, 2000);
          });
          book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
