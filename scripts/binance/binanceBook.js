@@ -7,7 +7,7 @@ binance.options({
     'APISECRET': secret.secret
 });
 
-const products = ['LTCBTC', 'ETCBTC'];
+const products = ['LTCBTC', 'ETHBTC'];
 
 var param = process.argv.slice(2)[0];
 
@@ -15,39 +15,40 @@ if (param) {
     setUpBinanceBook(param);
 }
 else {
-    setUpBinanceBook(products[0]);
+    orderBook(products);
 }
 
-function setUpBinanceBook (product) {
-    binance.websockets.depthCache([product], function(symbol, depth) {
+function orderBook(products) {
+     for(var i = 0; i < products.length; i++) {
+         setUpBook(products[i]);
+     }
+ }
+
+ function setUpBook (product) {
+     binance.websockets.depthCache([product], function(symbol, depth) {
     let bids = binance.sortBids(depth.bids);
     let asks = binance.sortAsks(depth.asks);
     let bidsKey = binance.first(bids);
     let asksKey = binance.first(asks);
-    let bestBidsSize = bids[bidsKey];
-    let bestAsksSize = asks[asksKey];
-    let bidsString = "best bid: " + bidsKey + ", size: " + bestBidsSize;
-    let asksString = "best ask: " + asksKey + ", size: " + bestAsksSize;
-    var bidFilename = './binance_db/' + product + '_bid.json';
-    var askFilename = './binance_db/' + product + '_ask.json';
+    let bestBidSize = bids[bidsKey];
+    let bestAskSize = asks[asksKey];
+    let productSliced = product.slice(0, 3) + "-" + product.slice(3);
+    let fileName = './binance_db/' + productSliced + '.json';
 
-    let adjustedAskPrice = asksKey * 1.01;
+    fs.writeFileSync(fileName, JSON.stringify({
+        product: productSliced,
+        bestAskPrice: asksKey,
+        bestAskSize: bestAskSize,
+        bestBidPrice: bidsKey,
+        bestBidSize: bestBidSize
+    }));
 
-    let bidsObject = {
-        price: bidsKey,
-        size: bestAsksSize
-    };
-
-    let asksObject = {
-        price: adjustedAskPrice,
-        size: bestAsksSize
-    };
-
-    fs.writeFileSync(bidFilename, JSON.stringify(bidsObject));
-    fs.writeFileSync(askFilename, JSON.stringify(asksObject));
-
-    console.log("binanceBook wrote " + JSON.stringify(asksObject) + ' to ' + askFilename);
-    console.log("binanceBook wrote " + JSON.stringify(bidsObject) + ' to ' + bidFilename);
+    console.log("binanceBook wrote to " + fileName);
     });
+
+ }
+
+function setUpBinanceBook (product) {
+
 }
 

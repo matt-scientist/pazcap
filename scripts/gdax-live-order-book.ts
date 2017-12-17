@@ -5,26 +5,24 @@ import { LiveBookConfig, LiveOrderbook, SkippedMessageEvent } from "gdax-trading
 const logger = GTT.utils.ConsoleLoggerFactory({ level: 'debug' });
 var fs = require('fs');
 
-const productIds: Array<string> = [
+const products: Array<string> = [
 'BTC-USD', 'BTC-EUR', 'BTC-GBP', 
 'ETH-USD', 'ETH-BTC', 'ETH-EUR', 
 'LTC-USD', 'LTC-BTC', 'LTC/EUR'
 ];
 
-orderBook(productIds);
+orderBook(products);
 
-
-
-function orderBook(productIds: Array<string>) {
-     for(var i = 0; i < productIds.length; i++) {
-         setUpBook(productIds[i]);
+function orderBook(products: Array<string>) {
+     for(var i = 0; i < products.length; i++) {
+         setUpBook(products[i]);
      }
  }
 
- function setUpBook(productId:string) {
-     GTT.Factories.GDAX.FeedFactory(logger, [productId]).then((feed: GDAXFeed) => {
+ function setUpBook(product:string) {
+     GTT.Factories.GDAX.FeedFactory(logger, [product]).then((feed: GDAXFeed) => {
          const config: LiveBookConfig = {
-             product: productId,
+             product: product,
              logger: logger
          };
          const book = new LiveOrderbook(config);
@@ -35,9 +33,10 @@ function orderBook(productIds: Array<string>) {
                 const bestBidPrice = Number(book.state().bids[0].price);
                 const bestBidSize = Number(book.state().bids[0].totalSize);
 
-                 var filename = './db/' + productId + '.json';
+                 var filename = './db/' + product + '.json';
 
                  fs.writeFileSync(filename, JSON.stringify({
+                    product: product,
                     bestAskPrice: bestAskPrice,
                     bestAskSize: bestAskSize,
                     bestBidPrice: bestBidPrice,

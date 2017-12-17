@@ -5,7 +5,7 @@ setInterval(function() {
     execute()
 }, 5000);
 
-const filesToLoad = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json'];
+const filesToLoad = ['./db/LTC-BTC.json', './binance_db/LTC-BTC.json'];
 
 function execute(files) {
 var loadFile = function (path) {
@@ -23,7 +23,7 @@ var promises = filesToLoad.map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 
-    var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).bestAskPrice) - Number(JSON.parse(files[1]).price);
+    var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).bestAskPrice) - (Number(JSON.parse(files[1]).bestAskPrice) * 1.01);
 
     fs.writeFileSync('./binance_db/spread_LTC-BTC.txt', ltc_btc_binance_gdax);
 
