@@ -8,7 +8,7 @@ var fs = require('fs');
 const products: Array<string> = [
 'BTC-USD', 'BTC-EUR', 'BTC-GBP', 
 'ETH-USD', 'ETH-BTC', 'ETH-EUR', 
-'LTC-USD', 'LTC-BTC', 'LTC/EUR'
+'LTC-USD', 'LTC-BTC', 'LTC-EUR'
 ];
 
 orderBook(products);

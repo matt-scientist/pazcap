@@ -25,20 +25,23 @@ function execute(product) {
     getOrders(function(orders) {
     //console.log(orders);
 
-    fs.readFile ("./binance_db/spread_" + product + ".txt", 'utf8', function (error, data) {
+    fs.readFile ("./db/spread/" + product + '_gdax_binance.json', 'utf8', function (error, data) {
             if (error) {
                 console.log("read error: ", error);
             }
 
-            console.log("SPREAD: " + data);
+            console.log("SPREAD: " + data.pasSell_actBuy);
 
-            if (data < 0) {
+            if (data.pasSell_actBuy < 0) {
                 for(var i = 0; i < orders.length; i++) {
                     if (orders[i].product_id === product){
                         cancelOrder(orders[i].id);
                     }
                 }
             }
+
+            // if filled
+            // place market buy on Binance
 
         });
     });

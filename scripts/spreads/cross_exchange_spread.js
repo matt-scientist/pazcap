@@ -37,7 +37,7 @@ rsvp.all(promises).then(function(files) {
     let exch1_ask = Number(JSON.parse(files[1]).bestAskPrice);
     let exch1_bid = Number(JSON.parse(files[1]).bestBidPrice);
 
-    const spread = {
+    var spread = JSON.stringify({
         //NOTE: EXCHANGE_0 is the QUOTE, EXCHANGE 1 is the MARKET ORDER - Assume Passive - Active or Active Active
         pasSell_actBuy: ((exch0_ask*(1-exchange0.limitFee)) - (exch1_ask*(1+exchange1.marketFee))), //sell0 buy1
         actSell_actBuy: ((exch0_bid*(1-exchange0.marketFee)) - (exch1_ask*(1+exchange1.marketFee))), 
@@ -45,9 +45,9 @@ rsvp.all(promises).then(function(files) {
         pasBuy_actSell: (-1*((exch0_bid*(1+exchange0.limitFee)) - (exch1_bid*(1-exchange1.marketFee)))), //buy0 sell1
         actBuy_actSell: (-1*((exch0_ask*(1+exchange0.marketFee)) - (exch1_bid*(1-exchange1.marketFee)))), 
 
-    };
+    });
 
-    fs.writeFileSync('./db/spreads/' + product + '_' + exchange0 + '_' + exchange1, spread);
+    fs.writeFileSync('./db/spreads/' + product + '_' + exchange0.name + '_' + exchange1.name + '.json', spread);
 
     console.log('|________________________________________________________|')
     console.log(exchange0.name, exchange1.name);

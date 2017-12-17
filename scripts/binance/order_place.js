@@ -20,38 +20,28 @@ const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase
 execute();
 
 function execute() {
-var loadFile = function (path) {
-        return new rsvp.Promise(function (resolve, reject) {
-            fs.readFile (path, 'utf8', function (error, data) {
-                if (error) {
-                    reject(error);
-                }
-                resolve(data);
-            });
-        });
-    };
 
-var promises = ['./db/gdax/LTC-BTC.json', './db/binance/LTC-BTC.json', './db/binance/spread_LTC-BTC.txt'].map(loadFile);
+var promises = ['./db/gdax/LTC-BTC.json', './db/binance/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.json'].map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 
-	let gdax_ltcbtc = JSON.parse(files[0]);
-	let binance_ltcbtc_ask = JSON.parse(files[1]);
-	let spread_ltcbtc = files[2];
+	let gdax = JSON.parse(files[0]);
+	let binance = JSON.parse(files[1]);
+	let spread = JSON.parse(files[2]);
 
-	console.log("GDAX Best Ask: ", gdax_ltcbtc.bestAsk);
+	console.log("GDAX Best Ask, Size: ", gdax.bestAskPrice, gdax.bestAskSize);
 
-	console.log("Binance Best Ask: ", binance_ltcbtc_ask.bestAskPrice);
+	console.log("Binance Best Ask, Size: ", binance.bestAskPrice, binance.bestAskSize);
 
-    const sizeLimit_ltc = 0.1;
-    console.log("SPREAD" + spread_ltcbtc);
+    const sizeLimit = 0.1;
+    console.log("SPREAD" + spread;
 
-    if ((binance_ltcbtc_ask.size >= sizeLimit_ltc) && (spread_ltcbtc > 0)) {
-    	console.log("quoting GDAX");
+    if ((binance.bestAskSize >= sizeLimit) && (spread.pasSell_actBuy > 0)) {
+    	console.log("quoting GDAX for PS_AB");
 
     	const args = {
-				price: gdax_ltcbtc.bestAsk,
-				size: sizeLimit_ltc,
+				price: gdax.bestAskPrice,
+				size: sizeLimit,
 				product_id: 'LTC-BTC'
 		};
 
@@ -76,3 +66,13 @@ function limitSellGdax(args) {
 	});
 }
 
+var loadFile = function (path) {
+        return new rsvp.Promise(function (resolve, reject) {
+            fs.readFile (path, 'utf8', function (error, data) {
+                if (error) {
+                    reject(error);
+                }
+                resolve(data);
+            });
+        });
+    };
