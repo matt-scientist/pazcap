@@ -31,13 +31,20 @@ var promises = filesToLoad.map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 
+    let exch0_ask = Number(JSON.parse(files[0]).bestAskPrice);
+    let exch0_bid = Number(JSON.parse(files[0]).bestBidPrice);
+
+    let exch1_ask = Number(JSON.parse(files[1]).bestAskPrice);
+    let exch1_bid = Number(JSON.parse(files[1]).bestBidPrice);
+
     const spread = {
-        passiveSell_activeBuy: ((Number(JSON.parse(files[0]).bestAskPrice) * exchange0.limitFee) - (Number(JSON.parse(files[1]).bestAskPrice) * exchange1.marketFee)), 
-        activeBuy_passiveSell: ((Number(JSON.parse(files[0]).bestAskPrice) * exchange0.marketFee) - (Number(JSON.parse(files[1]).bestAskPrice) * exchange1.limitFee)),
-        activeSell_passiveBuy: ((Number(JSON.parse(files[0]).bestBidPrice) * exchange0.marketFee) - (Number(JSON.parse(files[1]).bestBidPrice) * exchange1.limitFee)),
-        passiveBuy_activeSell: ((Number(JSON.parse(files[0]).bestBidPrice) * exchange0.limitFee) - (Number(JSON.parse(files[1]).bestBidPrice) * exchange1.marketFee)),
-        activeSell_activeBuy: ((Number(JSON.parse(files[0]).bestBidPrice) * exchange0.marketFee) - (Number(JSON.parse(files[1]).bestAskPrice) * exchange1.marketFee)), 
-        activeBuy_activeSell: ((Number(JSON.parse(files[0]).bestAskPrice) * exchange0.marketFee) - (Number(JSON.parse(files[1]).bestBidPrice) * exchange1.marketFee)),
+        //NOTE: EXCHANGE_0 is the QUOTE, EXCHANGE 1 is the MARKET ORDER - Assume Passive - Active or Active Active
+        pasSell_actBuy: ((exch0_ask*(1-exchange0.limitFee)) - (exch1_ask*(1+exchange1.marketFee))), 
+        actSell_actBuy: ((exch0_bid*(1-exchange0.marketFee)) - (exch1_ask*(1+exchange1.marketFee))), 
+
+        pasBuy_actSell: ((exch0_bid*(1+exchange0.limitFee)) - (exch1_bid*(1-exchange1.marketFee))),
+        actBuy_actSell: ((exch0_ask*(1+exchange0.marketFee)) - (exch1_bid*(1-exchange1.marketFee))), 
+
     };
 
     fs.writeFileSync('./db/spreads/' + product + '_' + exchange0 + '_' + exchange1, spread);
@@ -63,3 +70,4 @@ function loadFile (path) {
             });
         });
     };
+
