@@ -58,8 +58,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="live-order-book.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/live-order-book.ts">
+      <file leaf-file-name="gdax-live-order-book.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/gdax-live-order-book.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
               <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
@@ -142,14 +142,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/eurusd.js" />
-        <option value="$PROJECT_DIR$/live-order-book.ts" />
+        <option value="$PROJECT_DIR$/gdax-live-order-book.ts" />
         <option value="$PROJECT_DIR$/calculate_spread.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/db/mid_btceur.txt" />
         <option value="$PROJECT_DIR$/scripts/eurusd.js" />
         <option value="$PROJECT_DIR$/main.js" />
-        <option value="$PROJECT_DIR$/scripts/live-order-book.ts" />
+        <option value="$PROJECT_DIR$/scripts/gdax-live-order-book.ts" />
         <option value="$PROJECT_DIR$/scripts/calculate_spread.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/binance/binanceBook.js" />
@@ -342,7 +342,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/mid_btcusd.txt" />
-    <entry file="file://$PROJECT_DIR$/scripts/live-order-book.ts">
+    <entry file="file://$PROJECT_DIR$/scripts/gdax-live-order-book.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
           <caret line="55" column="40" lean-forward="false" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
@@ -400,7 +400,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/mid_btcusd.txt" />
-    <entry file="file://$PROJECT_DIR$/scripts/live-order-book.ts">
+    <entry file="file://$PROJECT_DIR$/scripts/gdax-live-order-book.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1260">
           <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
@@ -418,7 +418,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/live-order-book.ts">
+    <entry file="file://$PROJECT_DIR$/scripts/gdax-live-order-book.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1560">
           <caret line="104" column="32" lean-forward="false" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
@@ -685,7 +685,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/live-order-book.ts">
+    <entry file="file://$PROJECT_DIR$/scripts/gdax-live-order-book.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
           <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />

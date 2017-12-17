@@ -9,7 +9,7 @@ const fork = cp.fork;
 
 /* Live Book Child Process */
 
-var liveOrderBookChild = spawn('ts-node', ['./scripts/live-order-book.ts']);
+var liveOrderBookChild = spawn('ts-node', ['./scripts/gdax-live-order-book.ts']);
 
 liveOrderBookChild.on('error', function(err) {
     console.log('***** !!!!! ***** received error from liveOrderBookChild');
@@ -17,7 +17,7 @@ liveOrderBookChild.on('error', function(err) {
 });
 
 // liveOrderBookChild.stdout.on('data', function(data) {
-//     console.log('LIVE-ORDER-BOOK: ', data.toString('utf8'));
+//     console.log('gdax-live-order-book: ', data.toString('utf8'));
 // });
 
 /* End Live Book Child Process */

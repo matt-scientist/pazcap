@@ -5,8 +5,9 @@ setInterval(function() {
     execute()
 }, 5000);
 
+const filesToLoad = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json'];
 
-function execute() {
+function execute(files) {
 var loadFile = function (path) {
         return new rsvp.Promise(function (resolve, reject) {
             fs.readFile (path, 'utf8', function (error, data) {
@@ -18,12 +19,11 @@ var loadFile = function (path) {
         });
     };
 
-var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json','./db/ETH-BTC.json', './binance_db/ethbtc_ask.json'].map(loadFile);
+var promises = filesToLoad.map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 
-    var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).bestAsk) - Number(JSON.parse(files[1]).price);
-    //var eth_btc_binance_gdax = Number(JSON.parse(files[2]).midprice) - Number(JSON.parse(files[3]).price);
+    var ltc_btc_binance_gdax = Number(JSON.parse(files[0]).bestAskPrice) - Number(JSON.parse(files[1]).price);
 
     fs.writeFileSync('./binance_db/spread_LTC-BTC.txt', ltc_btc_binance_gdax);
 

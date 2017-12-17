@@ -31,7 +31,7 @@ var loadFile = function (path) {
         });
     };
 
-var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json', './binance_db/spread_LTCBTC.txt'].map(loadFile);
+var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json', './binance_db/spread_LTC-BTC.txt'].map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 

@@ -6,7 +6,7 @@ require('ts-node').register({ /* options */ });
 const cp = require('child_process');
 const spawn = cp.spawn;
 const fork = cp.fork;
-var liveOrderBookChild = spawn('ts-node', ['./scripts/live-order-book.ts']);
+var liveOrderBookChild = spawn('ts-node', ['./scripts/gdax-live-order-book.ts']);
 var binanceBookChild = spawn(`node ./scripts/binance/binanceBook.js LTCBTC`, [], { shell: true });
 var binanceSpreadChild = spawn('node', ['./scripts/binance/calc_gdax_binance.js']);
 
