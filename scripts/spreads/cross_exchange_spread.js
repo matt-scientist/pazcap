@@ -39,11 +39,11 @@ rsvp.all(promises).then(function(files) {
 
     const spread = {
         //NOTE: EXCHANGE_0 is the QUOTE, EXCHANGE 1 is the MARKET ORDER - Assume Passive - Active or Active Active
-        pasSell_actBuy: ((exch0_ask*(1-exchange0.limitFee)) - (exch1_ask*(1+exchange1.marketFee))), 
+        pasSell_actBuy: ((exch0_ask*(1-exchange0.limitFee)) - (exch1_ask*(1+exchange1.marketFee))), //sell0 buy1
         actSell_actBuy: ((exch0_bid*(1-exchange0.marketFee)) - (exch1_ask*(1+exchange1.marketFee))), 
 
-        pasBuy_actSell: ((exch0_bid*(1+exchange0.limitFee)) - (exch1_bid*(1-exchange1.marketFee))),
-        actBuy_actSell: ((exch0_ask*(1+exchange0.marketFee)) - (exch1_bid*(1-exchange1.marketFee))), 
+        pasBuy_actSell: (-1*((exch0_bid*(1+exchange0.limitFee)) - (exch1_bid*(1-exchange1.marketFee)))), //buy0 sell1
+        actBuy_actSell: (-1*((exch0_ask*(1+exchange0.marketFee)) - (exch1_bid*(1-exchange1.marketFee)))), 
 
     };
 
