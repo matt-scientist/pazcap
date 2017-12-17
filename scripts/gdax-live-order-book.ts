@@ -33,7 +33,7 @@ function orderBook(products: Array<string>) {
                 const bestBidPrice = Number(book.state().bids[0].price);
                 const bestBidSize = Number(book.state().bids[0].totalSize);
 
-                 var filename = './db/' + product + '.json';
+                 var filename = './db/gdax/' + product + '.json';
 
                  fs.writeFileSync(filename, JSON.stringify({
                     product: product,

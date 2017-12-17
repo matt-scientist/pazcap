@@ -33,7 +33,7 @@ function orderBook(products) {
     let bestBidSize = bids[bidsKey];
     let bestAskSize = asks[asksKey];
     let productSliced = product.slice(0, 3) + "-" + product.slice(3);
-    let fileName = './binance_db/' + productSliced + '.json';
+    let fileName = './db/binance/' + productSliced + '.json';
 
     fs.writeFileSync(fileName, JSON.stringify({
         product: productSliced,
@@ -48,7 +48,4 @@ function orderBook(products) {
 
  }
 
-function setUpBinanceBook (product) {
-
-}
 

@@ -8,9 +8,9 @@ const spawn = cp.spawn;
 const fork = cp.fork;
 var liveOrderBookChild = spawn('ts-node', ['./scripts/gdax-live-order-book.ts']);
 var binanceBookChild = spawn(`node ./scripts/binance/binanceBook.js`, [], { shell: true });
-var binanceSpreadChild = spawn('node', ['./scripts/binance/calc_gdax_binance.js']);
+var spreadChild = spawn('node', ['./scripts/spreads/cross_exchange_spread.js']);
 
-const children = [liveOrderBookChild, binanceBookChild, binanceSpreadChild];
+const children = [liveOrderBookChild, binanceBookChild, spreadChild];
 
 init(children);
 

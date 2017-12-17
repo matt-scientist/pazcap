@@ -31,7 +31,7 @@ var loadFile = function (path) {
         });
     };
 
-var promises = ['./db/LTC-BTC.json', './binance_db/ltcbtc_ask.json', './binance_db/spread_LTC-BTC.txt'].map(loadFile);
+var promises = ['./db/gdax/LTC-BTC.json', './db/binance/LTC-BTC.json', './db/binance/spread_LTC-BTC.txt'].map(loadFile);
 
 rsvp.all(promises).then(function(files) {
 
@@ -41,7 +41,7 @@ rsvp.all(promises).then(function(files) {
 
 	console.log("GDAX Best Ask: ", gdax_ltcbtc.bestAsk);
 
-	console.log("Binance Best Ask: ", binance_ltcbtc_ask.price);
+	console.log("Binance Best Ask: ", binance_ltcbtc_ask.bestAskPrice);
 
     const sizeLimit_ltc = 0.1;
     console.log("SPREAD" + spread_ltcbtc);
