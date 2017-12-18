@@ -19,8 +19,10 @@
     "typescript": "^2.6.2"
   },
   "devDependencies": {
+    "crypto": "^1.0.1",
     "gdax": "^0.4.2",
     "node-binance-api": "^0.2.11",
+    "querystring": "^0.2.0",
     "rsvp": "^4.7.0"
   }
 }

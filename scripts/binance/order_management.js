@@ -16,10 +16,11 @@ const apiURI = 'https://api.gdax.com';
 
 const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
+console.log(gdaxAuthedClient);
 
-setInterval(function() {
-    execute('LTC-BTC');
-}, 2000);
+// setInterval(function() {
+//     execute('LTC-BTC');
+// }, 2000);
 
 function execute(product) {
     getOrders(function(orders) {
