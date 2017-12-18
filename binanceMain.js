@@ -9,8 +9,12 @@ const fork = cp.fork;
 var liveOrderBookChild = spawn('ts-node', ['./scripts/gdax-live-order-book.ts']);
 var binanceBookChild = spawn(`node ./scripts/binance/binanceBook.js`, [], { shell: true });
 var spreadChild = spawn('node', ['./scripts/spreads/cross_exchange_spread.js']);
+var socketChild = spawn('node', ['./scripts/binance/gdax-websocket.js']);
+var mgmtChild = spawn('node', ['./scripts/binance/order_management.js']);
+var orderChild = spawn('node', ['./scripts/binance/order_place.js']);
 
-const children = [liveOrderBookChild, binanceBookChild, spreadChild];
+
+const children = [liveOrderBookChild, binanceBookChild, spreadChild, socketChild, mgmtChild, orderChild];
 
 init(children);
 

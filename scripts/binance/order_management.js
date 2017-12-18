@@ -3,6 +3,7 @@ const secret = require('../../secrets/secret_binance');
 var fs = require("fs");
 const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
+var rsvp = require('rsvp');
 
 binance.options({
     'APIKEY':secret.key,
@@ -16,24 +17,34 @@ const apiURI = 'https://api.gdax.com';
 
 const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
-console.log(gdaxAuthedClient);
-
-// setInterval(function() {
-//     execute('LTC-BTC');
-// }, 2000);
+setInterval(function() {
+    execute('LTC-BTC');
+}, 4000);
 
 function execute(product) {
-    getOrders(function(orders) {
-    //console.log(orders);
 
-    fs.readFile ("./db/spread/" + product + '_gdax_binance.json', 'utf8', function (error, data) {
-            if (error) {
-                console.log("read error: ", error);
-            }
+var loadFile = function (path) {
+return new rsvp.Promise(function (resolve, reject) {
+    fs.readFile (path, 'utf8', function (error, data) {
+        if (error) {
+            reject(error);
+        }
+        resolve(data);
+    });
+});
+};
 
-            console.log("SPREAD: " + data.pasSell_actBuy);
+var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.json'].map(loadFile);
 
-            if (data.pasSell_actBuy < 0) {
+    rsvp.all(promises).then(function(files) {
+        getOrders(function(orders) {
+
+            let gdaxFile = JSON.parse(files[0]);
+            let spreadFile = JSON.parse(files[1]);
+            // console.log("SPREAD: " + spreadFile.pasSell_actBuy);
+
+
+            if (spreadFile.pasSell_actBuy < 0) {
                 for(var i = 0; i < orders.length; i++) {
                     if (orders[i].product_id === product){
                         cancelOrder(orders[i].id);
@@ -41,11 +52,17 @@ function execute(product) {
                 }
             }
 
-            // if filled
-            // place market buy on Binance
+            for (var i = 0; i < orders.length; i++) {
+                if (orders[i].price > gdaxFile.bestAskPrice) {
+                    console.log('front-runned for order: ', orders[i].id);
+                    cancelOrder(orders[i].id);
+                }
+            }
 
         });
     });
+
+
 }
 
 
@@ -59,7 +76,6 @@ function getOrders(callback) {
 
         if (orders.length === 0){
             console.log('you have no orders');
-            return;
         }
 
         callback(orders);

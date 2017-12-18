@@ -25,7 +25,16 @@ var auth = {
 	'passphrase': api_key.pass
 }
 
+let currentOrderSize = null;
+let currentOrderProduct = null;
+
+let socketOn = false;
+
 var socket = new Websocket('wss://ws-feed.gdax.com');
+
+setInterval(function() {
+	console.log('socket on: ', socketOn);
+}, 5000);
 
 socket.on('open', onOpen);
 socket.on('message', onMessage);
@@ -34,6 +43,7 @@ socket.on('error', onError);
 
 
 function onOpen () {
+	socketOn = true;
 	console.log('Opened web socket');
 	 const subscribeMessage = {
       type: 'subscribe',
@@ -60,12 +70,26 @@ function onOpen () {
 
 function onMessage (data) {
 	var message = JSON.parse(data);
+	if (message.type === 'received') {
 		console.log(message);
+		currentOrderSize = message.size;
+		currentOrderProduct = message.product_id;
+	}
+
+	if ((message.type === 'done') && (message.reason === 'filled')) {
+		console.log(message);
+		binance.marketBuy('LTCBTC', currentOrderSize, function(response) {
+			console.log("Market Buy response: ", response);
+			console.log("order id: " + response.orderId);
+		});	
+	};
 }
 
 function onClose() {
 	clearInterval(pinger);
     socket = null;
+    console.log('websocket closed');
+    socketOn = false;
 }
 
 function onError(error) {
@@ -73,10 +97,13 @@ function onError(error) {
       return;
     }
 
+    console.log('websocket error');
+
     if (error.message === 'unexpected server response (429)') {
       throw new Error(
         'You are connecting too fast and are being throttled! Make sure you subscribe to multiple books on one connection.'
       );
     }
+    socketOn = false;
 }
 

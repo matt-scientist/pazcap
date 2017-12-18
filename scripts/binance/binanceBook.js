@@ -43,7 +43,7 @@ function orderBook(products) {
         bestBidSize: bestBidSize
     }));
 
-    console.log("binanceBook wrote to " + fileName);
+    //console.log("binanceBook wrote to " + fileName);
     });
 
  }

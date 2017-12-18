@@ -43,7 +43,7 @@ function orderBook(products: Array<string>) {
                     bestBidSize: bestBidSize
                  }));
 
-                 console.log("gdax-live-order-book wrote to " + filename);
+                 //console.log("gdax-live-order-book wrote to " + filename);
              }, 2000);
          });
          book.on('LiveOrderbook.skippedMessage', (details: SkippedMessageEvent) => {
