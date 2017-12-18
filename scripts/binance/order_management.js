@@ -19,7 +19,7 @@ const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase
 
 setInterval(function() {
     execute('LTC-BTC');
-}, 4000);
+}, 2000);
 
 function execute(product) {
 
