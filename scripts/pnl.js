@@ -45,7 +45,7 @@ function calculateBalances(gdax_btc_start, gdax_btc_end, gdax_ltc_start, gdax_lt
 }
 
 //TODO, read this from the .txt or .json
-calculateBalances(1.54768863, 1.8794401019757225, 17.8578, 0.8578, 0.31537101, 0.00562521, 0, 15.98400000);
+calculateBalances(2.0780811819757225, 2.2771720519757225, 16.8408, 6.8408, 0.24526014, 0.04713814, 0, 9.99000000);
 
 function getAccount(id, callback) {
 	
