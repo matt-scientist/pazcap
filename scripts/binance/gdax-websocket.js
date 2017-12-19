@@ -76,7 +76,7 @@ function onMessage (data) {
 		currentOrderProduct = message.product_id;
 	}
 
-	if ((message.type === 'done') && (message.reason === 'filled') && (message.remainingSize === 0)) {
+	if ((message.type === 'done') && (message.reason === 'filled')) {
 		console.log(message);
 		binance.marketBuy('LTCBTC', currentOrderSize, function(response) {
 			console.log("Market Buy response: ", response);

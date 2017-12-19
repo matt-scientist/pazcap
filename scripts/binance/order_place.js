@@ -31,7 +31,7 @@ setInterval(function() {
             console.log('orders already exist, not placing another');
         }
     })
-}, 2073);
+}, 1073);
 
 function execute() {
     var loadFile = function (path) {
@@ -57,7 +57,7 @@ rsvp.all(promises).then(function(files) {
 
 	// console.log("Binance Best Ask, Size: ", binance.bestAskPrice, binance.bestAskSize);
 
-    const sizeLimit = 0.1;
+    const sizeLimit = 1.0;
 
 
     if ((binance.bestAskSize >= sizeLimit) && (spread.pasSell_actBuy > 0)) {

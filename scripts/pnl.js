@@ -19,6 +19,55 @@ const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase
 
 binance.balance(function(balances) {
 	//console.log("balances()", balances);
-	console.log("LTC balance: ", balances.LTC.available);
+	console.log('Binance Balances');
 	console.log("BTC balance: ", balances.BTC.available);
+	console.log("LTC balance: ", balances.LTC.available);
 });
+
+const BTC_accountID = '05a0a3a3-7b97-42ec-a9f3-976aa7e68281';
+const LTC_accountID = '0f6a825b-39ab-45a2-964d-dee5781e9f31';
+
+getAccount(BTC_accountID, function(data) {
+	console.log('GDAX Balances');
+	console.log(data.currency, ' ', data.balance);
+
+	getAccount(LTC_accountID, function(data) {
+
+		console.log(data.currency, ' ', data.balance);
+
+	});
+});
+
+function calculateBalances(gdax_btc_start, gdax_btc_end, gdax_ltc_start, gdax_ltc_end, bin_btc_start, bin_btc_end, bin_ltc_start, bin_ltc_end) {
+
+    console.log('Net BTC: ', (gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end));
+    console.log('Net LTC: ', (bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end));
+}
+
+//TODO, read this from the .txt or .json
+calculateBalances(1.54768863, 1.8794401019757225, 17.8578, 0.8578, 0.31537101, 0.00562521, 0, 15.98400000);
+
+function getAccount(id, callback) {
+	
+gdaxAuthedClient.getAccount(id, function(err, response, acct) {
+
+		if (err) {
+            console.log(err);
+            return;
+        }
+
+     	//console.log(acct);
+     	callback(acct);
+     });
+}
+
+function getAccounts(callback) {
+    gdaxAuthedClient.getAccounts(function(err, response, orders) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        callback(orders);
+    });
+}
