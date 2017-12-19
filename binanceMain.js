@@ -1,7 +1,5 @@
 'use strict';
 
-//const calculateSpread = require('./scripts/calculate_spread');
-
 require('ts-node').register({ /* options */ });
 const cp = require('child_process');
 const spawn = cp.spawn;

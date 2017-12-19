@@ -1,5 +1,6 @@
 const binance = require('node-binance-api');
 const secret = require('../../secrets/secret_binance');
+const { addDash, removeDash } = require('../utility/dash');
 var fs = require('fs');
 
 binance.options({
@@ -7,16 +8,9 @@ binance.options({
     'APISECRET': secret.secret
 });
 
-const products = ['LTCBTC', 'ETHBTC'];
+const products = ['LTC-BTC'];
 
-var param = process.argv.slice(2)[0];
-
-if (param) {
-    setUpBinanceBook(param);
-}
-else {
-    orderBook(products);
-}
+orderBook(products);
 
 function orderBook(products) {
      for(var i = 0; i < products.length; i++) {
@@ -25,25 +19,24 @@ function orderBook(products) {
  }
 
  function setUpBook (product) {
-     binance.websockets.depthCache([product], function(symbol, depth) {
+    binance.websockets.depthCache([removeDash(product)], function(symbol, depth) {
     let bids = binance.sortBids(depth.bids);
     let asks = binance.sortAsks(depth.asks);
     let bidsKey = binance.first(bids);
     let asksKey = binance.first(asks);
     let bestBidSize = bids[bidsKey];
     let bestAskSize = asks[asksKey];
-    let productSliced = product.slice(0, 3) + "-" + product.slice(3);
-    let fileName = './db/binance/' + productSliced + '.json';
+    let fileName = './db/binance/' + product + '.json';
 
     fs.writeFileSync(fileName, JSON.stringify({
-        product: productSliced,
+        product: product,
         bestAskPrice: asksKey,
         bestAskSize: bestAskSize,
         bestBidPrice: bidsKey,
         bestBidSize: bestBidSize
     }));
 
-    //console.log("binanceBook wrote to " + fileName);
+    console.log("binanceBook wrote to " + fileName);
     });
 
  }
