@@ -11,7 +11,7 @@ var SPREAD_OPP = {
     ActSell_ActBuy  : 1,
     PassBuy_ActSell : 2,
     ActBuy_ActSell  : 3,
-    No_Opp          : 5
+    No_Opp          : 4
 };
 
 var currentOpp = SPREAD_OPP.No_Opp;
@@ -33,6 +33,8 @@ function loadFile(path) {
 
 function execute() {
     loadFile(spreadFilePath).then(spreadData => {
+
+        console.log("localStorage: ");
 
         spreadData = JSON.parse(spreadData);
 
@@ -63,6 +65,8 @@ function execute() {
             }
 
             currentOpp = newOpp;
+            localStorage.setItem('spreadOpportunity', currentOpp.toString());
+            localStorage.setItem('spread', spread);
 
         } else if (passBuy_actSell_spread >= spreadAlertThreshold || actBuy_actSell_spread >= spreadAlertThreshold) {
 
@@ -89,8 +93,9 @@ function execute() {
             } else {
                 console.log("CURRENT SPREAD OPP: ", newOpp);
             }
-
             currentOpp = newOpp;
+            localStorage.setItem('spreadOpportunity', currentOpp.toString());
+            localStorage.setItem('spread', spread);
         } else {
             currentOpp = SPREAD_OPP.No_Opp;
             console.log("No spread opportunity.");

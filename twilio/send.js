@@ -18,6 +18,6 @@ function sendMessage(messageText) {
         body: messageText,
         to: ehingerCell,
         from: config.phoneNumber
-    }).then((message) => console.log(message));
+    }).then((message) => console.log("Alert Sent."));
 }
 

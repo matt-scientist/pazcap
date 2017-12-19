@@ -1,5 +1,11 @@
 'use strict';
 
+/*** local storage ***/
+
+var LocalStorage = require('node-localstorage').LocalStorage,
+    localStorage = new LocalStorage('./scratch');
+/*** spread watcher ***/
+
 require('ts-node').register({ /* options */ });
 const cp = require('child_process');
 const spawn = cp.spawn;
@@ -26,3 +32,28 @@ function init (children) {
         });
     }
 }
+
+/*** server ***/
+
+var express        =        require("express");
+var bodyParser     =        require("body-parser");
+var app            =        express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post('/handler',function(request,response){
+    let body = request.body.Body;
+    let from = request.body.From;
+    console.log("body: ", body);
+    console.log("from: ", from);
+
+    let variable = localStorage.getItem('spreadOpportunity');
+    let messageText = "Spread Opportunity: " + variable;
+    console.log("RESPONDING: ", messageText);
+    response.send(messageText);
+});
+
+app.listen(3000,function(){
+    console.log("Twilio Bot listening on 3000");
+})
