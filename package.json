@@ -23,6 +23,7 @@
     "gdax": "^0.4.2",
     "node-binance-api": "^0.2.11",
     "querystring": "^0.2.0",
-    "rsvp": "^4.7.0"
+    "rsvp": "^4.7.0",
+    "twilio": "^3.11.0"
   }
 }
