@@ -4,7 +4,7 @@ var fs = require("fs");
 const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
 const Websocket = require('ws');
-const { signRequest } = require('./request_signer');
+const { signRequest } = require('../utility/request_signer');
 
 binance.options({
     'APIKEY':secret.key,
@@ -76,7 +76,7 @@ function onMessage (data) {
 		currentOrderProduct = message.product_id;
 	}
 
-	if ((message.type === 'done') && (message.reason === 'filled')) {
+	if ((message.type === 'done') && (message.reason === 'filled') && (message.remainingSize === 0)) {
 		console.log(message);
 		binance.marketBuy('LTCBTC', currentOrderSize, function(response) {
 			console.log("Market Buy response: ", response);
