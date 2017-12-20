@@ -1,6 +1,6 @@
 const binance = require('node-binance-api');
 const secret = require('../../secrets/secret_binance');
-var fs = require("fs");
+const { loadFile } = require('../utility/load_file');
 const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
 var rsvp = require('rsvp');
@@ -23,17 +23,6 @@ setInterval(function() {
 
 function execute(product) {
 
-var loadFile = function (path) {
-return new rsvp.Promise(function (resolve, reject) {
-    fs.readFile (path, 'utf8', function (error, data) {
-        if (error) {
-            reject(error);
-        }
-        resolve(data);
-    });
-});
-};
-
 var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.json'].map(loadFile);
 
     rsvp.all(promises).then(function(files) {
@@ -41,7 +30,6 @@ var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.jso
 
             let gdaxFile = JSON.parse(files[0]);
             let spreadFile = JSON.parse(files[1]);
-            // console.log("SPREAD: " + spreadFile.pasSell_actBuy);
 
 
             if (spreadFile.pasSell_actBuy < 0) {
@@ -61,11 +49,7 @@ var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.jso
 
         });
     });
-
-
 }
-
-
 
 function getOrders(callback) {
     gdaxAuthedClient.getOrders(function(err, response, orders) {

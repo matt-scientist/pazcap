@@ -1,6 +1,7 @@
 const binance = require('node-binance-api');
 const secret = require('../../secrets/secret_binance');
 var fs = require("fs");
+const { loadFile } = require('../utility/load_file');
 const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
 var rsvp = require('rsvp');
@@ -34,16 +35,6 @@ setInterval(function() {
 }, 1073);
 
 function execute() {
-    var loadFile = function (path) {
-        return new rsvp.Promise(function (resolve, reject) {
-            fs.readFile (path, 'utf8', function (error, data) {
-                if (error) {
-                    reject(error);
-                }
-                resolve(data);
-            });
-        });
-    };
 
 var promises = ['./db/gdax/LTC-BTC.json', './db/binance/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.json'].map(loadFile);
 
@@ -52,10 +43,6 @@ rsvp.all(promises).then(function(files) {
 	let gdax = JSON.parse(files[0]);
 	let binance = JSON.parse(files[1]);
 	let spread = JSON.parse(files[2]);
-
-	// console.log("GDAX Best Ask, Size: ", gdax.bestAskPrice, gdax.bestAskSize);
-
-	// console.log("Binance Best Ask, Size: ", binance.bestAskPrice, binance.bestAskSize);
 
     const sizeLimit = 1.0;
 
@@ -75,8 +62,6 @@ rsvp.all(promises).then(function(files) {
         console.log('order not placed due to size or spread');
     }
 
-
-
     }).catch(function(reason) {
         console.log(reason); // something went wrong...
     });    
@@ -93,7 +78,7 @@ function limitSellGdax(args) {
 	});
 }
 
-function getOrders(callback) {
+function getOrders(callback) {. //this is really shitty right now, perhaps append anyOrders to the orders object and send to callback
     gdaxAuthedClient.getOrders(function(err, response, orders) {
         if (err) {
             console.log(err);
