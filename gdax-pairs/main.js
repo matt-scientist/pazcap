@@ -7,7 +7,9 @@ const send = require('./twilio/send');
 
 var gdaxUrl = 'https://support.gdax.com/customer/portal/articles/2425188';
 
-main();
+setInterval(function() {
+    main();
+}, 4000);
 
 /*
 * Queries GDAX website and looks for available pairs in the US market
@@ -77,7 +79,6 @@ function sendNewPairsAlert(newPairs) {
 
 function main() {
     findAvailableGdaxPairs().then(pairs => {
-        pairs.push("REP/BTC");
         console.log("GDAX Pairs: ", pairs);
         getKnownPairs().then(knownPairs => {
             console.log("Known Pairs: ", knownPairs);
@@ -86,7 +87,7 @@ function main() {
                 sendNewPairsAlert(newPairs);
                 updateKnownPairs(pairs);
             } else {
-                console.log("No new pairs detected.");
+                console.log("No new pairs detected.\n");
             }
         }, err => {
             console.log("err2: ", err);
