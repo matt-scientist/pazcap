@@ -1,5 +1,5 @@
 const binance = require('node-binance-api');
-const secret = require('../../secrets/secret_binance');
+const secret = require('../../secrets/ehinger_keys');
 var fs = require("fs");
 const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
@@ -7,23 +7,22 @@ const Websocket = require('ws');
 const { signRequest } = require('../utility/request_signer');
 
 binance.options({
-    'APIKEY':secret.key,
-    'APISECRET': secret.secret
+    'APIKEY':secret.binance.key,
+    'APISECRET': secret.binance.secret
 });
-
 
 const key = api_key["key"];
 const b64secret = api_key["secret"];
 const passphrase = api_key["pass"];
 const apiURI = 'https://api.gdax.com';
 
-const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
+const gdaxAuthedClient = new Gdax.AuthenticatedClient(secret.gdax.key, secret.gdax.secret, secret.gdax.passphrase, apiURI);
 
 var auth = {
-	'secret': api_key.secret,
-	'key': api_key.key,
-	'passphrase': api_key.pass
-}
+	'secret': secret.gdax.secret,
+	'key': secret.gdax.key,
+	'passphrase': secret.gdax.passphrase
+};
 
 let currentOrderSize = null;
 let currentOrderProduct = null;
@@ -40,7 +39,6 @@ socket.on('open', onOpen);
 socket.on('message', onMessage);
 socket.on('close', onClose);
 socket.on('error', onError);
-
 
 function onOpen () {
 	socketOn = true;
@@ -76,7 +74,7 @@ function onMessage (data) {
 		currentOrderProduct = message.product_id;
 	}
 
-	if ((message.type === 'done') && (message.reason === 'filled') && (message.remainingSize === 0)) {
+	if ((message.type === 'done') && (message.reason === 'filled')) {
 		console.log(message);
 		binance.marketBuy('LTCBTC', currentOrderSize, function(response) {
 			console.log("Market Buy response: ", response);

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="202775f1-1204-4442-865a-8418a8100dbd" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/dataMain.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/scripts/data-management/gdax-live-order-book.ts" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/scripts/utility/load_file.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/binanceMain.js" afterPath="$PROJECT_DIR$/binanceMain.js" />
       <change beforePath="$PROJECT_DIR$/db/binance/LTC-BTC.json" afterPath="$PROJECT_DIR$/db/binance/LTC-BTC.json" />
       <change beforePath="$PROJECT_DIR$/db/gdax/BTC-EUR.json" afterPath="$PROJECT_DIR$/db/gdax/BTC-EUR.json" />
       <change beforePath="$PROJECT_DIR$/db/gdax/BTC-GBP.json" afterPath="$PROJECT_DIR$/db/gdax/BTC-GBP.json" />
@@ -14,10 +18,16 @@
       <change beforePath="$PROJECT_DIR$/db/gdax/LTC-EUR.json" afterPath="$PROJECT_DIR$/db/gdax/LTC-EUR.json" />
       <change beforePath="$PROJECT_DIR$/db/gdax/LTC-USD.json" afterPath="$PROJECT_DIR$/db/gdax/LTC-USD.json" />
       <change beforePath="$PROJECT_DIR$/db/spreads/LTC-BTC_gdax_binance.json" afterPath="$PROJECT_DIR$/db/spreads/LTC-BTC_gdax_binance.json" />
-      <change beforePath="$PROJECT_DIR$/gdax-pairs/main.js" afterPath="$PROJECT_DIR$/gdax-pairs/main.js" />
-      <change beforePath="$PROJECT_DIR$/gdax-pairs/pairs.json" afterPath="$PROJECT_DIR$/gdax-pairs/pairs.json" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
       <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change beforePath="$PROJECT_DIR$/scripts/binance/binanceBook.js" afterPath="$PROJECT_DIR$/scripts/data-management/binanceBook.js" />
+      <change beforePath="$PROJECT_DIR$/scripts/binance/gdax-websocket.js" afterPath="$PROJECT_DIR$/scripts/binance/gdax-websocket.js" />
+      <change beforePath="$PROJECT_DIR$/scripts/binance/order_management.js" afterPath="$PROJECT_DIR$/scripts/binance/order_management.js" />
+      <change beforePath="$PROJECT_DIR$/scripts/binance/order_place.js" afterPath="$PROJECT_DIR$/scripts/binance/order_place.js" />
+      <change beforePath="$PROJECT_DIR$/scripts/pnl.js" afterPath="$PROJECT_DIR$/scripts/pnl.js" />
+      <change beforePath="$PROJECT_DIR$/scripts/spreads/cross_exchange_spread.js" afterPath="$PROJECT_DIR$/scripts/data-management/cross_exchange_spread.js" />
+      <change beforePath="$PROJECT_DIR$/scripts/spreads/spreadWatch.js" afterPath="$PROJECT_DIR$/scripts/spreads/spreadWatch.js" />
+      <change beforePath="$PROJECT_DIR$/twilioMain.js" afterPath="$PROJECT_DIR$/twilioMain.js" />
     </list>
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -36,8 +46,28 @@
       <file leaf-file-name="binanceMain.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/binanceMain.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="345">
+              <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order_place.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/binance/order_place.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-582">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gdax-pairs/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -46,28 +76,18 @@
       <file leaf-file-name="twilioMain.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twilioMain.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+            <state relative-caret-position="266">
+              <caret line="19" column="60" lean-forward="true" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gdax-pairs/main.js">
+      <file leaf-file-name="gdax-websocket.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/binance/gdax-websocket.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="89" column="53" lean-forward="false" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="send.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gdax-pairs/twilio/send.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+            <state relative-caret-position="15">
+              <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -78,16 +98,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="59" lean-forward="false" selection-start-line="0" selection-start-column="59" selection-end-line="0" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cross_exchange_spread.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/spreads/cross_exchange_spread.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="57" column="31" lean-forward="true" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -106,8 +116,28 @@
       <file leaf-file-name="spreadWatch.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/spreads/spreadWatch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="-549">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ehinger_keys.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/secrets/ehinger_keys.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dataMain.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataMain.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -127,6 +157,7 @@
       <find>first</find>
       <find>sort</find>
       <find>spread</find>
+      <find>binance</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,13 +184,16 @@
         <option value="$PROJECT_DIR$/spreadWatchMain.js" />
         <option value="$PROJECT_DIR$/db/spreads/LTC-BTC_gdax_binance.json" />
         <option value="$PROJECT_DIR$/twilio/receive.js" />
-        <option value="$PROJECT_DIR$/twilioMain.js" />
         <option value="$PROJECT_DIR$/scripts/spreads/spreadWatch.js" />
         <option value="$PROJECT_DIR$/twilio/send.js" />
         <option value="$PROJECT_DIR$/gdax-pairs/pairs.csv" />
         <option value="$PROJECT_DIR$/gdax-pairs/twilio/send.js" />
         <option value="$PROJECT_DIR$/gdax-pairs/pairs.json" />
         <option value="$PROJECT_DIR$/gdax-pairs/main.js" />
+        <option value="$PROJECT_DIR$/twilioMain.js" />
+        <option value="$PROJECT_DIR$/scripts/binance/gdax-websocket.js" />
+        <option value="$PROJECT_DIR$/binanceMain.js" />
+        <option value="$PROJECT_DIR$/scripts/binance/order_place.js" />
       </list>
     </option>
   </component>
@@ -205,7 +239,18 @@
             <path>
               <item name="pazcap" type="b2602c69:ProjectViewProjectNode" />
               <item name="pazcap" type="462c0819:PsiDirectoryNode" />
-              <item name="gdax-pairs" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pazcap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pazcap" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="binance" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pazcap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pazcap" type="462c0819:PsiDirectoryNode" />
+              <item name="secrets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -265,7 +310,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46827000" />
+    <option name="totallyTimeSpent" value="50026000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -307,15 +352,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/gdax-trading-toolkit/build/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/mid_btceur.txt" />
-    <entry file="file://$PROJECT_DIR$/db/mid_BTC-EUR.txt" />
     <entry file="file://$PROJECT_DIR$/db/mid_ETH-BTC.txt" />
     <entry file="file://$PROJECT_DIR$/db/mid_ETH-USD.txt" />
     <entry file="file://$PROJECT_DIR$/db/mid_LTC-USD.txt" />
@@ -331,6 +367,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -404,37 +441,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/binance/request_signer.js" />
-    <entry file="file://$PROJECT_DIR$/scripts/binance/gdax-websocket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="57" column="28" lean-forward="true" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/binance/binanceBook.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/binance/binanceBook.js" />
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="3" lean-forward="false" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/binance/orderPlaceV2.js" />
     <entry file="file://$PROJECT_DIR$/reference/order.js" />
-    <entry file="file://$PROJECT_DIR$/scripts/binance/order_place.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/spreads/LTC-BTC_gdax_binance.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -455,23 +471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/binanceMain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/twilioMain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -483,42 +482,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gdax-pairs/pairs.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/gdax-pairs/pairs.csv" />
     <entry file="file://$PROJECT_DIR$/gdax-pairs/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/spreads/cross_exchange_spread.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="57" column="31" lean-forward="true" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/spreads/cross_exchange_spread.js" />
     <entry file="file://$PROJECT_DIR$/gdax-pairs/twilio/send.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/spreads/spreadWatch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="20" selection-end-column="9" />
+          <caret line="8" column="43" lean-forward="false" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -541,8 +517,72 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gdax-pairs/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="89" column="53" lean-forward="false" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+        <state relative-caret-position="102">
+          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/secrets/secret.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataMain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/spreads/spreadWatch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-549">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/secrets/ehinger_keys.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twilioMain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="19" column="60" lean-forward="true" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/binanceMain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/binance/gdax-websocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/binance/order_place.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-582">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -1,4 +1,5 @@
 var fs = require('fs');
+const { loadFile } = require('../utility/load_file');
 var rsvp = require('rsvp');
 
 let exchange0 = {
@@ -59,15 +60,4 @@ rsvp.all(promises).then(function(files) {
         console.log(reason); // something went wrong...
     });    
 }
-
-function loadFile (path) {
-        return new rsvp.Promise(function (resolve, reject) {
-            fs.readFile (path, 'utf8', function (error, data) {
-                if (error) {
-                    reject(error);
-                }
-                resolve(data);
-            });
-        });
-    };
 
