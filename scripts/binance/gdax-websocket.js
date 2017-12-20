@@ -11,7 +11,6 @@ binance.options({
     'APISECRET': secret.secret
 });
 
-
 const key = api_key["key"];
 const b64secret = api_key["secret"];
 const passphrase = api_key["pass"];
@@ -40,7 +39,6 @@ socket.on('open', onOpen);
 socket.on('message', onMessage);
 socket.on('close', onClose);
 socket.on('error', onError);
-
 
 function onOpen () {
 	socketOn = true;

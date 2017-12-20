@@ -1,7 +1,7 @@
 'use strict';
 
 const send = require('../../twilio/send');
-const fs = require('fs');
+const { loadFile } = require('../utility/load_file');
 
 var spreadFilePath = './db/spreads/LTC-BTC_gdax_binance.json';
 var spreadAlertThreshold = 0.0003;
@@ -14,22 +14,12 @@ var SPREAD_OPP = {
     No_Opp          : 4
 };
 
+console.log('in file');
 var currentOpp = SPREAD_OPP.No_Opp;
 
 setInterval(function() {
     execute();
 }, 4000);
-
-function loadFile(path) {
-    return new Promise(function (resolve, reject) {
-        fs.readFile (path, 'utf8', function (error, data) {
-            if (error) {
-                reject(error);
-            }
-            resolve(data);
-        });
-    });
-};
 
 function execute() {
     loadFile(spreadFilePath).then(spreadData => {

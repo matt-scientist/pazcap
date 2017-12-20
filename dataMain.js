@@ -3,12 +3,11 @@
 require('ts-node').register({ /* options */ });
 const cp = require('child_process');
 const spawn = cp.spawn;
-var socketChild = spawn('node', ['./scripts/binance/gdax-websocket.js']);
-//var mgmtChild = spawn('node', ['./scripts/binance/order_management.js']);
-//var orderChild = spawn('node', ['./scripts/binance/order_place.js']);
+var liveOrderBookChild = spawn('ts-node', ['./scripts/data-management/gdax-live-order-book.ts']);
+var binanceBookChild = spawn(`node ./scripts/data-management/binanceBook.js`, [], { shell: true });
+var spreadChild = spawn('node', ['./scripts/data-management/cross_exchange_spread.js']);
 
-
-const children = [socketChild];
+const children = [liveOrderBookChild, binanceBookChild, spreadChild];
 
 init(children);
 
