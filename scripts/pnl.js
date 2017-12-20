@@ -17,27 +17,53 @@ const apiURI = 'https://api.gdax.com';
 
 const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
+
+
 binance.balance(function(balances) {
 	//console.log("balances()", balances);
 	console.log('Binance Balances');
 	console.log("BTC balance: ", balances.BTC.available);
 	console.log("LTC balance: ", balances.LTC.available);
+
+    return [balances.BTC.available, balances.LTC.available];
 });
 
 const BTC_accountID = '05a0a3a3-7b97-42ec-a9f3-976aa7e68281';
 const LTC_accountID = '0f6a825b-39ab-45a2-964d-dee5781e9f31';
+const exchange0 = 'gdax';
+const exchange1 = 'binance';
 
-getAccount(BTC_accountID, function(data) {
+getAccount(BTC_accountID, function(data0) {
 	console.log('GDAX Balances');
-	console.log(data.currency, ' ', data.balance);
+	console.log(data0.currency, ' ', data0.balance);
+
+
 
 	getAccount(LTC_accountID, function(data) {
 
 		console.log(data.currency, ' ', data.balance);
+        console.log(data0);
+
+        //SAVE to .json
+
+        var balances = JSON.stringify({
+
+            gdax_btc: (data0.balance), 
+            gdax_ltc: (data.balance), 
+            binance_btc: ('null'),
+            binance_ltc: ('null'),
+
+    });
+        new Date();
+
+        console.log(String(Date.now()));
+
+        fs.writeFileSync('./db/balances/'+ String(Date.now()) + '_' +  exchange0 + '_' + exchange1 + '.json', balances);
 
 	});
 });
 
+//DEPRECATED
 function calculateBalances(gdax_btc_start, gdax_btc_end, gdax_ltc_start, gdax_ltc_end, bin_btc_start, bin_btc_end, bin_ltc_start, bin_ltc_end) {
 
     console.log('Net BTC: ', (gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end));
