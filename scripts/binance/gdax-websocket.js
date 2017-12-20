@@ -1,5 +1,5 @@
 const binance = require('node-binance-api');
-const secret = require('../../secrets/ehinger_keys');
+const secret = require('../../secrets/secret_binance');
 var fs = require("fs");
 const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
@@ -7,8 +7,8 @@ const Websocket = require('ws');
 const { signRequest } = require('../utility/request_signer');
 
 binance.options({
-    'APIKEY':secret.binance.key,
-    'APISECRET': secret.binance.secret
+    'APIKEY':secret.key,
+    'APISECRET': secret.secret
 });
 
 const key = api_key["key"];
@@ -16,13 +16,13 @@ const b64secret = api_key["secret"];
 const passphrase = api_key["pass"];
 const apiURI = 'https://api.gdax.com';
 
-const gdaxAuthedClient = new Gdax.AuthenticatedClient(secret.gdax.key, secret.gdax.secret, secret.gdax.passphrase, apiURI);
+const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
 var auth = {
-	'secret': secret.gdax.secret,
-	'key': secret.gdax.key,
-	'passphrase': secret.gdax.passphrase
-};
+	'secret': api_key.secret,
+	'key': api_key.key,
+	'passphrase': api_key.pass
+}
 
 let currentOrderSize = null;
 let currentOrderProduct = null;
