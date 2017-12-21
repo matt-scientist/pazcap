@@ -78,7 +78,7 @@ function limitSellGdax(args) {
 	});
 }
 
-function getOrders(callback) {. //this is really shitty right now, perhaps append anyOrders to the orders object and send to callback
+function getOrders(callback) { //this is really shitty right now, perhaps append anyOrders to the orders object and send to callback
     gdaxAuthedClient.getOrders(function(err, response, orders) {
         if (err) {
             console.log(err);

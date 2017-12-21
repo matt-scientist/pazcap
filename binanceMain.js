@@ -4,11 +4,11 @@ require('ts-node').register({ /* options */ });
 const cp = require('child_process');
 const spawn = cp.spawn;
 var socketChild = spawn('node', ['./scripts/binance/gdax-websocket.js']);
-//var mgmtChild = spawn('node', ['./scripts/binance/order_management.js']);
-//var orderChild = spawn('node', ['./scripts/binance/order_place.js']);
+var mgmtChild = spawn('node', ['./scripts/binance/order_management.js']);
+var orderChild = spawn('node', ['./scripts/binance/order_place.js']);
 
 
-const children = [socketChild];
+const children = [socketChild, mgmtChild, orderChild];
 
 init(children);
 
