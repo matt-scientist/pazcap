@@ -4,7 +4,7 @@ const send = require('../../twilio/send');
 const { loadFile } = require('../utility/load_file');
 
 var spreadFilePath = './db/spreads/LTC-BTC_gdax_binance.json';
-var spreadAlertThreshold = 0.0003;
+var spreadAlertThreshold = 0.00001;
 
 var SPREAD_OPP = {
     PassSell_ActBuy : 0,
