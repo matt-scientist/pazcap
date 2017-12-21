@@ -1,7 +1,6 @@
 const binance = require('node-binance-api');
 const secret = require('../../secrets/secret_binance');
 var fs = require("fs");
-const Gdax = require('gdax');
 var api_key = require("../../secrets/secret.json");
 const Websocket = require('ws');
 const { signRequest } = require('../utility/request_signer');
@@ -10,13 +9,6 @@ binance.options({
     'APIKEY':secret.key,
     'APISECRET': secret.secret
 });
-
-const key = api_key["key"];
-const b64secret = api_key["secret"];
-const passphrase = api_key["pass"];
-const apiURI = 'https://api.gdax.com';
-
-const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
 var auth = {
 	'secret': api_key.secret,
@@ -33,7 +25,7 @@ var socket = new Websocket('wss://ws-feed.gdax.com');
 
 setInterval(function() {
 	console.log('socket on: ', socketOn);
-}, 5000);
+}, 8000);
 
 socket.on('open', onOpen);
 socket.on('message', onMessage);
@@ -76,9 +68,12 @@ function onMessage (data) {
 
 	if ((message.type === 'done') && (message.reason === 'filled')) {
 		console.log(message);
+
 		binance.marketBuy('LTCBTC', currentOrderSize, function(response) {
-			console.log("Market Buy response: ", response);
-			console.log("order id: " + response.orderId);
+
+  		console.log("Market Buy response: ", response);
+  		console.log("order id: " + response.orderId);
+
 		});	
 	};
 }

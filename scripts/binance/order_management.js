@@ -1,21 +1,7 @@
-const binance = require('node-binance-api');
-const secret = require('../../secrets/secret_binance');
-const { loadFile } = require('../utility/load_file');
-const Gdax = require('gdax');
-var api_key = require("../../secrets/secret.json");
 var rsvp = require('rsvp');
+const { loadFile } = require('../utility/load_file');
+const { getOrdersGdax, cancelOrderGdax } = require('../utility/gdax_methods');
 
-binance.options({
-    'APIKEY':secret.key,
-    'APISECRET': secret.secret
-});
-
-const key = api_key["key"];
-const b64secret = api_key["secret"];
-const passphrase = api_key["pass"];
-const apiURI = 'https://api.gdax.com';
-
-const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
 setInterval(function() {
     execute('LTC-BTC');
@@ -23,10 +9,11 @@ setInterval(function() {
 
 function execute(product) {
 
-var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.json'].map(loadFile);
+var promises = ['./db/gdax/' + product + '.json', './db/spreads/' + product + '_gdax_binance.json'].map(loadFile);
 
     rsvp.all(promises).then(function(files) {
-        getOrders(function(orders) {
+        getOrdersGdax(function(orders) {
+            console.log('into function' + JSON.stringify(promises));
 
             let gdaxFile = JSON.parse(files[0]);
             let spreadFile = JSON.parse(files[1]);
@@ -35,7 +22,7 @@ var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.jso
             if (spreadFile.pasSell_actBuy < 0) {
                 for(var i = 0; i < orders.length; i++) {
                     if (orders[i].product_id === product){
-                        cancelOrder(orders[i].id);
+                        cancelOrderGdax(orders[i].id);
                     }
                 }
             }
@@ -43,40 +30,10 @@ var promises = ['./db/gdax/LTC-BTC.json', './db/spreads/LTC-BTC_gdax_binance.jso
             for (var i = 0; i < orders.length; i++) {
                 if (orders[i].price > gdaxFile.bestAskPrice) {
                     console.log('front-runned for order: ', orders[i].id);
-                    cancelOrder(orders[i].id);
+                    cancelOrderGdax(orders[i].id);
                 }
             }
 
         });
     });
-}
-
-function getOrders(callback) {
-    gdaxAuthedClient.getOrders(function(err, response, orders) {
-        if (err) {
-            console.log(err);
-            return;
-        }
-
-        if (orders.length === 0){
-            console.log('you have no orders');
-        }
-
-        callback(orders);
-    });
-}
-
-
-function cancelOrder(orderId) {
-    gdaxAuthedClient.cancelOrder(orderId, function(err, response, result) {
-
-        if (err) {
-            console.log(err);
-            return;
-        }
-
-        console.log('CANCELLED');
-
-        console.log(result);
-    })
 }
