@@ -1,12 +1,6 @@
-const binance = require('node-binance-api');
-const secret = require('../../secrets/secret_binance');
+const binance = require('../utility/binance_methods');
 const { addDash, removeDash } = require('../utility/dash');
 var fs = require('fs');
-
-binance.options({
-    'APIKEY':secret.key,
-    'APISECRET': secret.secret
-});
 
 const products = ['LTC-BTC'];
 
