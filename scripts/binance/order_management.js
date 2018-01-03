@@ -2,7 +2,6 @@ var rsvp = require('rsvp');
 const { loadFile } = require('../utility/load_file');
 const { getOrdersGdax, cancelOrderGdax } = require('../utility/gdax_methods');
 
-
 setInterval(function() {
     execute('LTC-BTC');
 }, 2000);

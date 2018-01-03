@@ -1,14 +1,9 @@
-const binance = require('node-binance-api');
-const secret = require('../../secrets/secret_binance');
-var fs = require("fs");
+const binance = require('../utility/binance_methods');
 var api_key = require("../../secrets/secret.json");
+var fs = require("fs");
 const Websocket = require('ws');
 const { signRequest } = require('../utility/request_signer');
-
-binance.options({
-    'APIKEY':secret.key,
-    'APISECRET': secret.secret
-});
+const { removeDash } = require('../utility/dash');
 
 var auth = {
 	'secret': api_key.secret,
@@ -16,16 +11,17 @@ var auth = {
 	'passphrase': api_key.pass
 }
 
+const profileId = 'cbcceb96-8fd8-4693-be07-387e169e8393';
+
 let currentOrderSize = null;
 let currentOrderProduct = null;
-
 let socketOn = false;
-
-var socket = new Websocket('wss://ws-feed.gdax.com');
 
 setInterval(function() {
 	console.log('socket on: ', socketOn);
 }, 8000);
+
+var socket = new Websocket('wss://ws-feed.gdax.com');
 
 socket.on('open', onOpen);
 socket.on('message', onMessage);
@@ -39,7 +35,7 @@ function onOpen () {
       type: 'subscribe',
       product_ids: ['LTC-BTC'],
       channels: ['user'],
-      profileId: 'cbcceb96-8fd8-4693-be07-387e169e8393'
+      profileId: profileId
     };
 
     let sig = signRequest(
@@ -63,18 +59,18 @@ function onMessage (data) {
 	if (message.type === 'received') {
 		console.log(message);
 		currentOrderSize = message.size;
-		currentOrderProduct = message.product_id;
+		currentOrderProduct = message.product_id.removeDash();
 	}
 
 	if ((message.type === 'done') && (message.reason === 'filled')) {
 		console.log(message);
 
-		binance.marketBuy('LTCBTC', currentOrderSize, function(response) {
+		// binance.marketBuy(currentOrderProduct, currentOrderSize, function(response) {
 
-  		console.log("Market Buy response: ", response);
-  		console.log("order id: " + response.orderId);
+  // 		console.log("Market Buy response: ", response);
+  // 		console.log("order id: " + response.orderId);
 
-		});	
+		// });	
 	};
 }
 
