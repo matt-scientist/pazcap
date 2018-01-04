@@ -11,18 +11,18 @@ const gdaxAuthedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase
 module.exports.limitSellGdax = (args) => {
 	gdaxAuthedClient.sell(args, function(err, response, data) {
 		if (err) {
-			console.log(err);
+			console.log('gdax err: ' + err);
 			return;
 		}
 
-		console.log(data);
+		console.log('gdax-data: ' + JSON.stringify(data));
 	});
 }
 
 module.exports.getOrdersGdax = (callback) => {
     gdaxAuthedClient.getOrders(function(err, response, orders) {
         if (err) {
-            console.log(err);
+            console.log('gdax err: ' + err);
             return;
         }
 
@@ -38,7 +38,7 @@ module.exports.cancelOrderGdax = (orderId) => {
     gdaxAuthedClient.cancelOrder(orderId, function(err, response, result) {
 
         if (err) {
-            console.log(err);
+            console.log('gdax err: ' + err);
             return;
         }
 

@@ -12,7 +12,6 @@ var promises = ['./db/gdax/' + product + '.json', './db/spreads/' + product + '_
 
     rsvp.all(promises).then(function(files) {
         getOrdersGdax(function(orders) {
-            console.log('into function' + JSON.stringify(promises));
 
             let gdaxFile = JSON.parse(files[0]);
             let spreadFile = JSON.parse(files[1]);
