@@ -38,8 +38,6 @@ getAccount(BTC_accountID, function(data0) {
 	//console.log('GDAX Balances');
 	//console.log(data0.currency, ' ', data0.balance);
 
-    console.log(data0);
-
     getBinanceBalances(function(binance_balance) {
 
     //console.log(binance_balance.BTC.available);
@@ -76,8 +74,8 @@ getAccount(BTC_accountID, function(data0) {
 //DEPRECATED
 
 
-const startfile = './db/balances/1513890997121_gdax_binance.json';
-const endfile = './db/balances/1513894504438_gdax_binance.json';
+const startfile = './db/balances/1515033880277_gdax_binance.json';
+const endfile = './db/balances/1515034556743_gdax_binance.json';
 
 calculateBalances(startfile, endfile);
 
