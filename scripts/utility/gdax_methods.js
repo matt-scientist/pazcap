@@ -47,3 +47,27 @@ module.exports.cancelOrderGdax = (orderId) => {
         console.log(result);
     })
 }
+
+module.exports.getAccountsGdax = (callback) => {
+    gdaxAuthedClient.getAccounts(function(err, response, orders) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        callback(orders);
+    });
+}
+
+module.exports.getAccountGdax = (id, callback) => {
+    
+gdaxAuthedClient.getAccount(id, function(err, response, acct) {
+
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        callback(acct);
+     });
+}

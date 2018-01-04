@@ -63,7 +63,7 @@ getAccount(BTC_accountID, function(data0) {
 
         //console.log(String(Date.now()));
 
-        console.log(balances);
+        //console.log(balances);
 
         fs.writeFileSync('./db/balances/'+ String(Date.now()) + '_' +  exchange0 + '_' + exchange1 + '.json', balances);
 
@@ -73,14 +73,57 @@ getAccount(BTC_accountID, function(data0) {
 });
 
 //DEPRECATED
-function calculateBalances(gdax_btc_start, gdax_btc_end, gdax_ltc_start, gdax_ltc_end, bin_btc_start, bin_btc_end, bin_ltc_start, bin_ltc_end) {
+
+
+const startfile = './db/balances/1515033880277_gdax_binance.json';
+const endfile = './db/balances/1515034556743_gdax_binance.json';
+
+calculateBalances(startfile, endfile);
+
+function calculateBalances(snapshotjson_start, snapshotjson_end) {
+
+    var promises = [startfile, endfile].map(loadFile);
+
+    rsvp.all(promises).then(function(files) {
+
+        //console.log(files);
+
+        snapshotjson_start = files[0];
+        snapshotjson_end = files[1];
+
+        //works
+        //console.log(JSON.parse(snapshotjson_start).gdax_btc);
+
+        const gdax_btc_start = JSON.parse(snapshotjson_start).gdax_btc;
+        const gdax_ltc_start = JSON.parse(snapshotjson_start).gdax_ltc;
+        const bin_btc_start = JSON.parse(snapshotjson_start).binance_btc;
+        const bin_ltc_start = JSON.parse(snapshotjson_start).binance_ltc;
+
+        const gdax_btc_end = JSON.parse(snapshotjson_end).gdax_btc;
+        const gdax_ltc_end = JSON.parse(snapshotjson_end).gdax_ltc;
+        const bin_btc_end = JSON.parse(snapshotjson_end).binance_btc;
+        const bin_ltc_end = JSON.parse(snapshotjson_end).binance_ltc;
+
+        console.log('Net BTC: ', (gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end));
+        console.log('Net LTC: ', (bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end));
+
+    });
+
+    /*let gdax_btc_start = Number(JSON.parse(snapshotjson_start.gdax_btc));
+    let gdax_ltc_start = Number(JSON.parse(snapshotjson_start.gdax_ltc));
+    let bin_btc_start = Number(JSON.parse(snapshotjson_start.binance_btc));
+    let bin_ltc_start = Number(JSON.parse(snapshotjson_start.binance_ltc));
+
+    let gdax_btc_end = Number(JSON.parse(snapshotjson_end.gdax_btc));
+    let gdax_ltc_end = Number(JSON.parse(snapshotjson_end.gdax_ltc));
+    let bin_btc_end = Number(JSON.parse(snapshotjson_end.binance_btc));
+    let bin_ltc_end = Number(JSON.parse(snapshotjson_end.binance_ltc));
 
     console.log('Net BTC: ', (gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end));
-    console.log('Net LTC: ', (bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end));
+    console.log('Net LTC: ', (bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end));*/
 }
 
 //TODO, read this from the .txt or .json
-//calculateBalances(2.0780811819757225, 2.2771720519757225, 16.8408, 6.8408, 0.24526014, 0.04713814, 0, 9.99000000);
 
 function getAccount(id, callback) {
 	
@@ -106,3 +149,14 @@ function getAccounts(callback) {
         callback(orders);
     });
 }
+
+function loadFile (path) {
+        return new rsvp.Promise(function (resolve, reject) {
+            fs.readFile (path, 'utf8', function (error, data) {
+                if (error) {
+                    reject(error);
+                }
+                resolve(data);
+            });
+        });
+    };
