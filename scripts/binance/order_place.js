@@ -1,5 +1,6 @@
 var fs = require("fs");
 var rsvp = require('rsvp');
+const authedBinance = require('../utility/binance_methods');
 const { loadFile } = require('../utility/load_file');
 const { limitSellGdax, getOrdersGdax } = require('../utility/gdax_methods');
 
@@ -14,7 +15,8 @@ setInterval(function() {
             console.log('orders already exist, not placing another');
         }
     })
-}, 1073);
+}, 4073);
+
 
 function execute(product) {
 
@@ -28,17 +30,23 @@ rsvp.all(promises).then(function(files) {
 
     const sizeLimit = 0.1;
 
-
     if ((binance.bestAskSize >= sizeLimit) && (spread.pasSell_actBuy > 0)) {
-    	console.log("quoting GDAX for PS_AB");
 
-    	const args = {
-				price: gdax.bestAskPrice,
-				size: sizeLimit,
-				product_id: product
-		};
+        authedBinance.balance(function(balances) {
+            console.log('available BTC on binance:' + balances.BTC.available);
+            if (balances.BTC.available >= (sizeLimit * binance.bestAskPrice)) {
+                console.log("quoting GDAX for PS_AB");
 
-		limitSellGdax(args);
+                const args = {
+                        price: gdax.bestAskPrice,
+                        size: sizeLimit,
+                        product_id: product
+                };
+
+                limitSellGdax(args);
+            }
+        });
+
     }
     else {
         console.log('order not placed due to size or spread');

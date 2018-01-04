@@ -1,4 +1,5 @@
 const binance = require('node-binance-api');
+const binance = require('node-binance-api');
 const secret = require('../secrets/secret_binance');
 var fs = require("fs");
 const Gdax = require('gdax');
