@@ -5,8 +5,12 @@ const { getAccountGdax } = require('./utility/gdax_methods');
 
 execute();
 
-const strickGdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
-const strickGdaxLTCId = '7760f9e8-96d8-4fc1-86af-ad8afed42735';
+const gdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
+const gdaxLTCId = '7760f9e8-96d8-4fc1-86af-ad8afed42735';
+
+// //strick values
+// const GdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
+// const GdaxLTCId = '7760f9e8-96d8-4fc1-86af-ad8afed42735';
 
 function execute () {
     binance.balance(function(balances) {
@@ -14,10 +18,10 @@ function execute () {
         const initialBinanceBTC = balances.BTC.available;
         const initialBinanceLTC = balances.LTC.available;
 
-        getAccountGdax(strickGdaxBTCId, function(data) {
+        getAccountGdax(gdaxBTCId, function(data) {
             const initialGdaxBTC = (data.balance);
 
-            getAccountGdax(strickGdaxLTCId, function(data) {
+            getAccountGdax(gdaxLTCId, function(data) {
                 const initialGdaxLTC = (data.balance);
 
                 console.log('INITIAL VALUES: \n')
@@ -51,10 +55,10 @@ function pnlCalc(initials) {
         const binanceBTC = balances.BTC.available;
         const binanceLTC = balances.LTC.available;
 
-        getAccountGdax(strickGdaxBTCId, function(data) {
+        getAccountGdax(gdaxBTCId, function(data) {
             const gdaxBTC = (data.balance);
 
-            getAccountGdax(strickGdaxLTCId, function(data) {
+            getAccountGdax(gdaxLTCId, function(data) {
                 const gdaxLTC = (data.balance);
 
                 console.log('CURRENT VALUES: \n')
