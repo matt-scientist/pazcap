@@ -26,7 +26,7 @@ rsvp.all(promises).then(function(files) {
 	let binance = JSON.parse(files[1]);
 	let spread = JSON.parse(files[2]);
 
-    const sizeLimit = 0.1;
+    const sizeLimit = 2.0;
 
 
     if ((binance.bestAskSize >= sizeLimit) && (spread.pasSell_actBuy > 0)) {

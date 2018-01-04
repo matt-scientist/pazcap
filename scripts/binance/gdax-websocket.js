@@ -65,12 +65,12 @@ function onMessage (data) {
 	if ((message.type === 'done') && (message.reason === 'filled')) {
 		console.log(message);
 
-		// binance.marketBuy(currentOrderProduct, currentOrderSize, function(response) {
+		binance.marketBuy(currentOrderProduct, currentOrderSize, function(response) {
 
-  // 		console.log("Market Buy response: ", response);
-  // 		console.log("order id: " + response.orderId);
+  		console.log("Market Buy response: ", response);
+  		console.log("order id: " + response.orderId);
 
-		// });	
+		});	
 	};
 }
 
