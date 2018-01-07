@@ -18,7 +18,7 @@ rsvp.all(promises).then(function(files) {
             let spreadFile = JSON.parse(files[1]);
             let binanceFile = JSON.parse(files[2]);
 
-            const size = 8.5;
+            const size = 1.0;
 
             console.log('Size: ', size);
 

@@ -2,17 +2,24 @@ const binance = require('./utility/binance_methods');
 var fs = require("fs");
 var rsvp = require('rsvp');
 const { getAccountGdax } = require('./utility/gdax_methods');
-
-execute();
+const { loadFile } = require('./utility/load_file');
 
 const gdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
 const gdaxLTCId = '7760f9e8-96d8-4fc1-86af-ad8afed42735';
+
+var promises = ['./db/gdax/BTC-USD.json', './db/binance/LTC-USD.json'].map(loadFile);
 
 // //strick values
 // const GdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
 // const GdaxLTCId = '7760f9e8-96d8-4fc1-86af-ad8afed42735';
 
-function execute () {
+ rsvp.all(promises).then(function(files) {
+    let btc = JSON.parse(files[0]);
+    let ltc = JSON.parse(files[1]);
+                execute(btc, ltc);
+});                
+
+function execute (btc, ltc) {
     binance.balance(function(balances) {
 
         const initialBinanceBTC = balances.BTC.available;
@@ -41,14 +48,14 @@ function execute () {
                 }
 
                 setInterval(function() {
-                    pnlCalc(initials);
+                    pnlCalc(initials, btc, ltc);
                 }, 10000);
              });
         });
     });
 }
 
-function pnlCalc(initials) {
+function pnlCalc(initials, btc, ltc) {
     console.log('\ncalculating PNL...\n');
     binance.balance(function(balances) {
 
@@ -70,15 +77,25 @@ function pnlCalc(initials) {
                 console.log('btc ' + binanceBTC);
                 console.log('\n')
 
-                calculateBalances(initials.initialGdaxBTC, gdaxBTC, initials.initialGdaxLTC, gdaxLTC, initials.initialBinanceBTC, binanceBTC, initials.initialBinanceLTC, binanceLTC);
-             });
+                calculateBalances(initials.initialGdaxBTC, gdaxBTC, initials.initialGdaxLTC, gdaxLTC, initials.initialBinanceBTC, binanceBTC, initials.initialBinanceLTC, binanceLTC, btc.bestAskPrice, ltc.bestAskPrice);
+
+            });
+
         });
     });
 }
 
-function calculateBalances(gdax_btc_start, gdax_btc_end, gdax_ltc_start, gdax_ltc_end, bin_btc_start, bin_btc_end, bin_ltc_start, bin_ltc_end) {
+function calculateBalances(gdax_btc_start, gdax_btc_end, gdax_ltc_start, gdax_ltc_end, bin_btc_start, bin_btc_end, bin_ltc_start, bin_ltc_end, btcPrice, ltcPrice) {
 
-    console.log('Net BTC: ', (gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end));
-    console.log('Net LTC: ', (bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end));
+    let netBTC = ((gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end));
+    let netLTC = ((bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end));
+
+    console.log('netBTC var', netBTC);
+    console.log('netLTC var', netLTC);
+
+    console.log('Net BTC: ', ((gdax_btc_end - gdax_btc_start) - (bin_btc_start - bin_btc_end)));
+    console.log('Net LTC: ', ((bin_ltc_end - bin_ltc_start) - (gdax_ltc_start - gdax_ltc_end)));
+    console.log('Net Dollars')
+
 }
 

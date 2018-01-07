@@ -12,7 +12,7 @@ var fs = require('fs');
 // ];
 
 const products: Array<string> = [
-'LTC-BTC'
+'LTC-BTC', 'LTC-USD', 'BTC-USD'
 ];
 
 orderBook(products);

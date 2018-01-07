@@ -15,7 +15,7 @@ module.exports.limitSellGdax = (args) => {
 			return;
 		}
 
-		console.log('gdax-data: ' + JSON.stringify(data));
+		console.log(data);
 	});
 }
 
