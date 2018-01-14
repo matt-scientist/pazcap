@@ -1,5 +1,5 @@
 const binance = require('node-binance-api');
-const binance = require('node-binance-api');
+//const binance = require('node-binance-api');
 const secret = require('../secrets/secret_binance');
 var fs = require("fs");
 const Gdax = require('gdax');
@@ -75,8 +75,8 @@ getAccount(BTC_accountID, function(data0) {
 //DEPRECATED
 
 
-const startfile = './db/balances/1515033880277_gdax_binance.json';
-const endfile = './db/balances/1515034556743_gdax_binance.json';
+const startfile = './db/balances/1515102477646_gdax_binance.json';
+const endfile = './db/balances/1515102783369_gdax_binance.json';
 
 calculateBalances(startfile, endfile);
 

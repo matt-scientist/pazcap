@@ -18,12 +18,13 @@ rsvp.all(promises).then(function(files) {
             let spreadFile = JSON.parse(files[1]);
             let binanceFile = JSON.parse(files[2]);
 
-            const size = 8.5;
+            const sizeLimit = 10.0;
 
-            console.log('Size: ', size);
+            if (spreadFile.actSell_actBuy > 0) {
+            	console.log('Active active positive');
 
-            if (spreadFile.actSell_actBuy > 0 && gdaxFile.bestBidSize > size && binanceFile.bestAskSize > size) {
-            	console.log('Active active firing');
+                const size = Math.round(Math.min(gdaxFile.bestBidSize, binanceFile.bestAskSize, sizeLimit));
+                console.log("order size: ", size);
 
             	binance.marketBuy('LTCBTC', size, function(response) {
 

@@ -5,8 +5,8 @@ const { getAccountGdax } = require('./utility/gdax_methods');
 
 execute();
 
-const gdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
-const gdaxLTCId = '7760f9e8-96d8-4fc1-86af-ad8afed42735';
+const gdaxBTCId = '05a0a3a3-7b97-42ec-a9f3-976aa7e68281';
+const gdaxLTCId = '0f6a825b-39ab-45a2-964d-dee5781e9f31';
 
 // //strick values
 // const GdaxBTCId = '0e75cc76-4648-4a05-af75-75249c51c9e6';
