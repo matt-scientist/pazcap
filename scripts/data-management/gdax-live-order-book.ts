@@ -11,9 +11,12 @@ var fs = require('fs');
 // 'LTC-USD', 'LTC-BTC', 'LTC-EUR'
 // ];
 
+let param = process.argv.slice(2)[0];
+
 const products: Array<string> = [
-'LTC-BTC', 'LTC-USD', 'BTC-USD'
+    param.toString()
 ];
+
 
 orderBook(products);
 

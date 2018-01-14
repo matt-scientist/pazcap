@@ -3,7 +3,11 @@ const { loadFile } = require('../utility/load_file');
 const { getOrdersGdax, cancelOrderGdax, limitSellGdax } = require('../utility/gdax_methods');
 const binance = require('../utility/binance_methods');
 
-execute('LTC-BTC');
+let param = process.argv.slice(2)[0];
+
+let product = param;
+
+execute(product.toString());
 
 function execute(product) {
 
