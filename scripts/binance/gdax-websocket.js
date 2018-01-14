@@ -19,7 +19,7 @@ let socketOn = false;
 
 setInterval(function() {
 	console.log('socket on: ', socketOn);
-}, 8000);
+}, 5000);
 
 var socket = new Websocket('wss://ws-feed.gdax.com');
 
@@ -83,6 +83,7 @@ function onClose() {
 
 function onError(error) {
 	if (!error) {
+    console.log('!error');
       return;
     }
 

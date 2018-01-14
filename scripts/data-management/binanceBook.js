@@ -2,7 +2,9 @@ const binance = require('../utility/binance_methods');
 const { addDash, removeDash } = require('../utility/dash');
 var fs = require('fs');
 
-const products = ['LTC-BTC'];
+let param = process.argv.slice(2)[0];
+
+const products = [param.toString()];
 
 orderBook(products);
 

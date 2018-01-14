@@ -3,7 +3,11 @@ const { loadFile } = require('../utility/load_file');
 const { getOrdersGdax, cancelOrderGdax, limitSellGdax } = require('../utility/gdax_methods');
 const binance = require('../utility/binance_methods');
 
-execute('LTC-BTC');
+let param = process.argv.slice(2)[0];
+
+let product = param;
+
+execute(product.toString());
 
 function execute(product) {
 
@@ -18,7 +22,7 @@ rsvp.all(promises).then(function(files) {
             let spreadFile = JSON.parse(files[1]);
             let binanceFile = JSON.parse(files[2]);
 
-            const size = 8.5;
+            const size = 1.0;
 
             console.log('Size: ', size);
 
