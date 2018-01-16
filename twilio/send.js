@@ -16,7 +16,7 @@ module.exports = {
 function sendMessage(messageText) {
     client.messages.create({
         body: messageText,
-        to: ehingerCell,
+        to: roCell,
         from: config.phoneNumber
     }).then((message) => console.log("Alert Sent."));
 }

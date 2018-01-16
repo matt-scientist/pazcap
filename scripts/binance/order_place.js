@@ -30,6 +30,7 @@ rsvp.all(promises).then(function(files) {
 
     const sizeLimit = 0.01;
 
+
     if ((binance.bestAskSize >= sizeLimit) && (spread.pasSell_actBuy > 0)) {
 
         authedBinance.balance(function(balances) {
