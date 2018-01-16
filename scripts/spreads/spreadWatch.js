@@ -4,7 +4,8 @@ const send = require('../../twilio/send');
 const { loadFile } = require('../utility/load_file');
 
 var spreadFilePath = './db/spreads/LTC-BTC_gdax_binance.json';
-var spreadAlertThreshold = 0.00008;
+
+var spreadAlertThreshold = 0.00007;
 
 var SPREAD_OPP = {
     PassSell_ActBuy : 0,
@@ -33,7 +34,7 @@ function execute() {
         let passBuy_actSell_spread = spreadData["pasBuy_actSell"];
         let actBuy_actSell_spread = spreadData["actBuy_actSell"];
 
-        if(passSell_actBuy_spread >= spreadAlertThreshold || actSell_actBuy_spread >= spreadAlertThreshold) {
+        if(actSell_actBuy_spread >= spreadAlertThreshold) {
             let spread = 0.0;
             let recommendedAction = "";
             var newOpp = SPREAD_OPP.No_Opp;
