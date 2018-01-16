@@ -5,8 +5,7 @@ var secret = require("../../secrets/secret_kucoin.json");
 
 let kc = new Kucoin(secret.key, secret.secret);
 
-
-//getBalances();
+/* BALANCES */
 
 function getBalances() {
     return new Promise((resolve, reject) => {
@@ -18,35 +17,35 @@ function getBalances() {
         });
     })
 }
-//
-// kc.getOrderBooks({
-//     pair: 'POWR-BTC'
-// }).then(result => {
-//
-//     const data = result.data;
-//     const sell = data.SELL;
-//     const buy = data.BUY;
-//     console.log("data: ", data);
-//
-//     }).catch(console.error);
-//
 
-calculateSpread();
+/* ORDER BOOK */
 
+getOrderBook('LTC-BTC');
 
-function calculateSpread(baseProduct) {
+function getOrderBook(product) {
+    kc.getOrderBooks({
+        pair: product
+    }).then(result => {
 
-    kc.getExchangeRates().then(result => {
         const data = result.data;
-        const currencies = data.currencies;
-        console.log("currencies: ", currencies);
-        const rates = data.rates;
-        console.log("rates: ", rates);
-    }).catch(console.error)
+        const sell = data.SELL;
+        const buy = data.BUY;
 
+        const bestAsk = sell[sell.length-1];
+        const bestBid = buy[0];
+
+        console.log("sell: ", sell);
+        console.log("buy: ", buy);
+
+        console.log("bestAsk: ", bestAsk);
+        console.log("bestBuy: ", bestBid)
+
+
+
+    }).catch(console.error);
 }
 
-
+/* ORDER FUNCTIONS */
 
 function buy(args) {
     return new Promise((resolve, reject) => {
