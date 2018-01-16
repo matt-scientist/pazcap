@@ -1,6 +1,8 @@
 'use strict';
 
 const Kucoin = require('kucoin-api');
+const fs = require('fs');
+
 var secret = require("../../secrets/secret_kucoin.json");
 
 let kc = new Kucoin(secret.key, secret.secret);
@@ -34,14 +36,27 @@ function getOrderBook(product) {
         const bestAsk = sell[sell.length-1];
         const bestBid = buy[0];
 
-        console.log("sell: ", sell);
-        console.log("buy: ", buy);
+        // console.log("sell: ", sell);
+        // console.log("buy: ", buy);
+        //
+        // console.log("bestAsk: ", bestAsk);
+        // console.log("bestBid: ", bestBid);
 
-        console.log("bestAsk: ", bestAsk);
-        console.log("bestBuy: ", bestBid)
+        const bestAskPrice = bestAsk[0];
+        const bestAskSize = bestAsk[1];
 
+        const bestBidPrice = bestBid[0];
+        const bestBidSize = bestBid[1];
 
+        let fileName = './db/kucoin/' + product + '.json';
 
+        fs.writeFileSync(fileName, JSON.stringify({
+            product: product,
+            bestAskPrice: bestAskPrice,
+            bestAskSize: bestAskSize,
+            bestBidPrice: bestBidPrice,
+            bestBidSize: bestBidSize
+        }));
     }).catch(console.error);
 }
 
