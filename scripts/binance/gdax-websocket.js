@@ -9,7 +9,7 @@ var auth = {
 	'secret': api_key.secret,
 	'key': api_key.key,
 	'passphrase': api_key.pass
-}
+};
 
 const profileId = 'cbcceb96-8fd8-4693-be07-387e169e8393';
 
@@ -21,19 +21,27 @@ setInterval(function() {
 	console.log('socket on: ', socketOn);
 }, 5000);
 
-var socket = new Websocket('wss://ws-feed.gdax.com');
 
-socket.on('open', onOpen);
-socket.on('message', onMessage);
-socket.on('close', onClose);
-socket.on('error', onError);
+var tokenPair = "";
+
+function execute(product) {
+    var socket = new Websocket('wss://ws-feed.gdax.com');
+
+    tokenPair = product;
+
+    socket.on('open', onOpen);
+    socket.on('message', onMessage);
+    socket.on('close', onClose);
+    socket.on('error', onError);
+}
+
 
 function onOpen () {
 	socketOn = true;
 	console.log('Opened web socket');
 	 const subscribeMessage = {
       type: 'subscribe',
-      product_ids: ['LTC-BTC'],
+      product_ids: [tokenPair],
       channels: ['user'],
       profileId: profileId
     };
