@@ -15,7 +15,9 @@ let exchange1 = {
     marketFee: .001
 }
 
-let product = 'LTC-BTC';
+let param = process.argv.slice(2)[0];
+
+let product = param;
 
 setInterval(function() {
     execute(exchange0, exchange1, product);
