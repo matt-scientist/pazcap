@@ -7,6 +7,16 @@ var secret = require("../../secrets/secret_kucoin.json");
 
 let kc = new Kucoin(secret.key, secret.secret);
 
+execute('LTC-BTC');
+
+/* EXECUTE */
+function execute(product) {
+    setInterval(function() {
+        getOrderBook(product);
+    }, 1000);
+}
+
+
 /* BALANCES */
 
 function getBalances() {
@@ -22,8 +32,6 @@ function getBalances() {
 
 /* ORDER BOOK */
 
-getOrderBook('LTC-BTC');
-
 function getOrderBook(product) {
     kc.getOrderBooks({
         pair: product
@@ -36,11 +44,11 @@ function getOrderBook(product) {
         const bestAsk = sell[sell.length-1];
         const bestBid = buy[0];
 
-        // console.log("sell: ", sell);
-        // console.log("buy: ", buy);
-        //
-        // console.log("bestAsk: ", bestAsk);
-        // console.log("bestBid: ", bestBid);
+        console.log("sell: ", sell);
+        console.log("buy: ", buy);
+
+        console.log("bestAsk: ", bestAsk);
+        console.log("bestBid: ", bestBid);
 
         const bestAskPrice = bestAsk[0];
         const bestAskSize = bestAsk[1];
