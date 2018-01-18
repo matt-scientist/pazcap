@@ -2,19 +2,28 @@ const binance = require('../utility/binance_methods');
 const { addDash, removeDash } = require('../utility/dash');
 var fs = require('fs');
 
-let param = process.argv.slice(2)[0];
+// let param = process.argv.slice(2)[0];
+// const products = [param.toString()];
 
-const products = [param.toString()];
 
-orderBook(products);
+module.exports = {
+    execute: execute
+};
 
-function orderBook(products) {
-     for(var i = 0; i < products.length; i++) {
-         setUpBook(products[i]);
-     }
- }
+function execute(product, filename) {
 
- function setUpBook (product) {
+    console.log("Starting Binance order book for: ", product);
+
+    setUpBook(product, filename)
+}
+
+// function orderBook(products) {
+//      for(var i = 0; i < products.length; i++) {
+//          setUpBook(products[i]);
+//      }
+//  }
+
+ function setUpBook (product, filename) {
     binance.websockets.depthCache([removeDash(product)], function(symbol, depth) {
     let bids = binance.sortBids(depth.bids);
     let asks = binance.sortAsks(depth.asks);
@@ -22,9 +31,8 @@ function orderBook(products) {
     let asksKey = binance.first(asks);
     let bestBidSize = bids[bidsKey];
     let bestAskSize = asks[asksKey];
-    let fileName = './db/binance/' + product + '.json';
 
-    fs.writeFileSync(fileName, JSON.stringify({
+    fs.writeFileSync(filename, JSON.stringify({
         product: product,
         bestAskPrice: asksKey,
         bestAskSize: bestAskSize,
@@ -32,7 +40,7 @@ function orderBook(products) {
         bestBidSize: bestBidSize
     }));
 
-    console.log("binanceBook wrote to " + fileName);
+    console.log("binanceBook wrote to " + filename);
     });
 
  }
