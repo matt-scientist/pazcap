@@ -1,7 +1,7 @@
 {
   "twilio": {
     "phoneNumber": "+14755292752",
-    "accountSid": "ACd6c30ece87934b3bf8339bd968beff3b",
-    "authToken": "934d0344c15111438b7244cceef02bfe"
+    "accountSid": "",
+    "authToken": ""
   }
 }
